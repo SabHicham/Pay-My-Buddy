@@ -13,4 +13,7 @@ public class ContactDto {
     private String iban;
     private UserDto user;
     private BankDto bank;
+
+    public ContactDto() {
+    }
 }

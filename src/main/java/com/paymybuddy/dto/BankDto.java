@@ -8,4 +8,6 @@ import lombok.Data;
 public class BankDto {
     private int id;
     private String name;
+    public BankDto() {
+    }
 }

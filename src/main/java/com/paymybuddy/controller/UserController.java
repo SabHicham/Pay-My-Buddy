@@ -24,7 +24,7 @@ public class UserController {
 
     @ModelAttribute("user")
     public UserDto userDto() {
-        return new UserDto(userDto().getId(), userDto().getFirstName(), userDto().getLastName(), userDto().getEmail(), userDto().getPassword());
+        return new UserDto();
     }
 
     @GetMapping

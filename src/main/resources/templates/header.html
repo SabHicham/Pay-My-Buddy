@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <title>Menu</title>
+</head>
+
+<body>
+<header th:fragment="header">
+    <div class="container">
+        <div style="height:40px;border:2px solid black;" class="row bg-dark text-white">
+            <div>
+                <div class="imgAbt">
+                    <img width="100" height="30" th:src="@{/images/troispoints.png}"/>
+                    <p class="text-white offset-md-4"></p>
+                </div>
+            </div>
+            <div class="col md-4 offset-md-4" text-white>
+                <p class="text-white">pay my buddy</p>
+            </div>
+        </div>
+    </div>
+</header>
+<div container id="menu">
+    <div class="row align-items-center">
+        <div class="col">
+            <a href="home" class="btn btn-success offset-md-5 pt-3">Pay My Buddy</a>
+        </div>
+        <div class="col">
+            <nav class="navbar navbar-expand-lg bg-white">
+                <!-- Links -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="account">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="transaction">Transfer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profil">Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contactus">Contact us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/logout}">Log of</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+</body>
+</body>
+</html>

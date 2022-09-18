@@ -35,11 +35,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
-    /*@Override
+    @Override
     public User findUser() {
         String userMail = SecurityContextHolder.getContext().getAuthentication().getName();
         return userRepository.findByEmail(userMail);
-    }*/
+    }
 
 
 

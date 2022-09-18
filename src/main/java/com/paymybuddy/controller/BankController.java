@@ -7,6 +7,7 @@ import com.paymybuddy.model.Bank;
 import com.paymybuddy.service.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,5 +28,14 @@ public class BankController {
         Bank bank = bankMapper.toEntity(bankDto);
         bankService.createAccount(bank);
         return "redirect:/home";
+    }
+    @ModelAttribute("bank")
+    public BankDto bankDto() {
+        return new BankDto();
+    }
+
+    @GetMapping
+    public String showRegistrationBankForm() {
+        return "bankregistration";
     }
 }

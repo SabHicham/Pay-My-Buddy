@@ -11,4 +11,7 @@ public class TransactionDto {
     private double amount;
     private AccountDto emitter;
     private AccountDto receiver;
+
+    public TransactionDto() {
+    }
 }
