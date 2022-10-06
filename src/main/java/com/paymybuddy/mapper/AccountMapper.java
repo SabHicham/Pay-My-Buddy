@@ -15,7 +15,7 @@ public class AccountMapper implements Mapper<Account, AccountDto> {
 
     @Override
     public Account toEntity(AccountDto dto) {
-        return new Account(dto.getId(), userMapper.toEntity(dto.getUser()), bankMapper.toEntity(dto.getBank()), dto.getIban(), dto.getSold(),dto.isUserAccount());
+        return new Account(dto.getId(), userMapper.toEntity(dto.getUser()), bankMapper.toEntity(dto.getBank()), dto.getIban(), dto.getSold());
     }
 
     @Override

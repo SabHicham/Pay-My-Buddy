@@ -16,8 +16,8 @@ public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String lastName;
     private String firstName;
+    private String lastName;
     private String email;
     private String iban;
     @ManyToOne()
@@ -26,4 +26,8 @@ public class Contact {
     @ManyToOne()
     @JoinColumn(name = "bankId", referencedColumnName = "id")
     private Bank bank;
+
+    public Contact(){
+
+    }
 }

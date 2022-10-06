@@ -12,9 +12,12 @@ public class TransactionMapper implements Mapper<Transaction, TransactionDto> {
     @Autowired
     private AccountMapper accountMapper;
 
+    @Autowired
+    private UserMapper userMapper;
+
     @Override
     public Transaction toEntity(TransactionDto dto) {
-        return new Transaction(dto.getId(), dto.getDescription(), dto.getAmount(),accountMapper.toEntity(dto.getEmitter()), accountMapper.toEntity(dto.getReceiver()));
+        return new Transaction(dto.getId(), dto.getDescription(), dto.getAmount(),dto.getEmitterEmail(),dto.getReceiverEmail(), dto.getEmitter()!=null?userMapper.toEntity(dto.getEmitter()):null, dto.getReceiver()!=null?userMapper.toEntity(dto.getReceiver()):null);
     }
 
     @Override

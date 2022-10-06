@@ -14,14 +14,21 @@ public class Transaction {
     private int id;
     private String description;
     private double amount;
+    @Transient
+    private String emitterEmail;
+    @Transient
+    private String receiverEmail;
 
 
     @ManyToOne()
     @JoinColumn(name = "emitter", referencedColumnName = "id")
-    private Account emitter;
+    private User emitter;
     @ManyToOne()
-    @JoinColumn(name = "received", referencedColumnName = "id")
-    private Account receiver;
+    @JoinColumn(name = "receiver", referencedColumnName = "id")
+    private User receiver;
 
+    public Transaction(){
+
+    }
 
 }

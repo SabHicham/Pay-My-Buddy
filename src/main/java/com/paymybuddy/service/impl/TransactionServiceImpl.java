@@ -31,23 +31,26 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Transaction createTransaction(Transaction transaction) throws Exception {
-        Account account = accountRepository.findByIban(transaction.getDescription());
-        Optional<Account> receiver = accountRepository.findById(transaction.getReceiver().getId());
-        if (receiver.get().getIban() == account.getIban()) {
-            // if receiver=sender then update sold
-            account.setSold(account.getSold() + transaction.getAmount());
-            accountRepository.save(account);
-            return transactionRepository.save(transaction);
-        } else {
-            // check if the sold is sufficient
-            if (account.getSold() >= transaction.getAmount()) {
-                account.setSold(account.getSold() - transaction.getAmount());
-                accountRepository.save(account);
+            User user = userRepository.findByEmail(transaction.getEmitterEmail());
+            User receiver = userRepository.findByEmail(transaction.getReceiverEmail());
+            transaction.setEmitter(user);
+            transaction.setReceiver(receiver);
+            if (receiver.getEmail() == user.getEmail()) {
+                // if receiver=sender then update sold
+                user.setSold(user.getSold() + transaction.getAmount());
+                userRepository.save(user);
                 return transactionRepository.save(transaction);
             } else {
-                throw new Exception("Not enough money on account");
-            }
-        }
+                // check if the sold is sufficient
+               // if (account.getSold() >= transaction.getAmount()) {
+                  //  account.setSold(account.getSold() - transaction.getAmount());
+                    //accountRepository.save(account);
+                   // transaction.setDate(LocalDate.now());
+                    return transactionRepository.save(transaction);
+                //} else {
+                 //   throw new Exception("Not enough money on account");
+                }
+
     }
 
 

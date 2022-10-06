@@ -3,6 +3,7 @@ package com.paymybuddy.service.impl;
 
 import com.paymybuddy.dto.UserDto;
 import com.paymybuddy.mapper.UserMapper;
+import com.paymybuddy.model.Bank;
 import com.paymybuddy.model.User;
 import com.paymybuddy.repository.AccountRepository;
 import com.paymybuddy.repository.BankRepository;
@@ -41,8 +42,16 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(userMail);
     }
 
-
-
+    @Override
+    public User createUser(User user) {
+        User userEmail = userRepository.findByEmail(user.getEmail());
+        if (userEmail == null) {
+            return userRepository.save(user);
+        } else {
+            userEmail.setEmail(user.getEmail());
+            return userRepository.save(userEmail);
+        }
+    }
 
 
     @Override

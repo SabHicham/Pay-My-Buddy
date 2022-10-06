@@ -22,7 +22,7 @@ public class ContactServiceImpl implements ContactService {
     private UserRepository userRepository;
 
     @Override
-    public List<Contact> ListOfContacts(User user) {
+    public List<Contact> listOfContacts(User user) {
         return contactRepository.findByuserId(user.getId());
     }
 

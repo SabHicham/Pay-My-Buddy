@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    <title>contact</title>
+</head>
+<body>
+
+<div class="topnav">
+    <b class="active" href="#home">Pay My Buddy</b>
+    <a class="active" href="/login?logout">Déconnexion</a>
+    <a href="/contact">Amis</a>
+    <a href="/profile">Profil</a>
+    <a href="/transaction">Transfert</a>
+    <a href="/home">Accueil</a>
+</div>
+<h1 class="offset-md-5 pb-3">Listes de mes amis</h1>
+<div class="col col-1" data-label=""><label for="contact">Mes amis</label>
+    <input list="amis" id="contact" name="contact"/>
+    <datalist  id="amis">
+        <select>
+            <option th:each="contact:${contacts}" th:value="${contact.firstName+' '+contact.lastName}">
+            </option>
+        </select>
+    </datalist></div>
+<!-- add contact -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+
+            <!-- success message -->
+            <div th:if="${param.success}">
+                <div class="alert alert-info">You've successfully registered a connection!</div>
+            </div>
+
+            <h2>Ajouter un amis</h2>
+
+        <form th:action="@{/contact}" method="post" th:object="${contact}">
+
+                <select hidden th:field="*{user.id}">
+                    <option th:each="emitter : ${emitter}"
+                            th:value="${emitter.id}"
+                            th:text="${emitter.email}"></option>
+                </select>
+
+
+            <div class="form-group">
+                <label class="control-label" for="firstName"> Prenom </label>
+                <input id="firstName" class="form-control" th:field="*{firstName}"
+                       required autofocus="autofocus" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="lastName"> Nom </label><input
+                    id="lastName" class="form-control" th:field="*{lastName}"
+                    required autofocus="autofocus" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="email"> Email </label><input
+                    id="email" class="form-control" th:field="*{email}"
+                    required autofocus="autofocus" />
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label" for="bank"> Banque </label><input
+                    id="bank" class="form-control" th:field="*{bank}"
+                    required autofocus="autofocus" />
+                    <select th:field="*{bank.id}">
+                        <option th:each="bank : ${banks}"
+                                th:value="${bank.getId()}"
+                                th:text="${bank.name}"></option>
+                    </select>
+            </div>
+                <div><a href="bankregistration">Saisir une nouvelle banque</a></div>
+
+
+            <div class="form-group">
+                <label class="control-label" for="iban"> Iban </label><input
+                    id="iban" class="form-control" th:field="*{iban}"
+                    required autofocus="autofocus" />
+            </div>
+
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Register</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+</div>
+</body>
+</html>

@@ -9,8 +9,6 @@
     <title>home</title>
 </head>
 <body>
-<div th:replace="header :: header"></div>
-<div th:insert="menu" id="menu"></div>
 
 <div class="container">
     <form class="offset-md-3" th:action="@{/account}" method="post" th:object="${account}">

@@ -8,5 +8,5 @@ import java.util.List;
 public interface ContactService {
     Contact createContact(Contact contact) throws Exception;
 
-    List<Contact> ListOfContacts(User user);
+    List<Contact> listOfContacts(User user);
 }

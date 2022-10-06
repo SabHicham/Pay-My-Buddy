@@ -16,7 +16,6 @@ public class AccountDto {
     private double sold;
 
 
-    private boolean userAccount;
     public AccountDto() {
     }
 }

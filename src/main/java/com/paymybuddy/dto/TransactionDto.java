@@ -9,8 +9,11 @@ public class TransactionDto {
     private int id;
     private String description;
     private double amount;
-    private AccountDto emitter;
-    private AccountDto receiver;
+    private String emitterEmail;
+    private String receiverEmail;
+    private UserDto emitter;
+    private UserDto receiver;
+
 
     public TransactionDto() {
     }

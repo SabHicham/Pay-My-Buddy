@@ -3,9 +3,11 @@ package com.paymybuddy.controller;
 import com.paymybuddy.dto.TransactionDto;
 import com.paymybuddy.mapper.TransactionMapper;
 import com.paymybuddy.model.Account;
+import com.paymybuddy.model.Contact;
 import com.paymybuddy.model.Transaction;
 import com.paymybuddy.model.User;
 import com.paymybuddy.service.AccountService;
+import com.paymybuddy.service.ContactService;
 import com.paymybuddy.service.TransactionService;
 import com.paymybuddy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +20,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping("/transaction")
 public class TransactionController {
+
 
     @Autowired
     private TransactionService transactionService;
@@ -33,14 +37,14 @@ public class TransactionController {
     @Autowired
     private AccountService accountService;
     @Autowired
-
     private TransactionMapper transactionMapper;
+    @Autowired
+    private ContactService contactService;
 
     @PostMapping
     public String registerUserAccount(@ModelAttribute("transaction") TransactionDto transactionDto) throws Exception {
         //create
-        Transaction transaction = transactionMapper.toEntity(transactionDto);
-        transactionService.createTransaction(transaction);
+        transactionService.createTransaction(transactionMapper.toEntity(transactionDto));
         return "redirect:/transaction";
     }
     @GetMapping
@@ -69,12 +73,22 @@ public class TransactionController {
         List<Account> userAccounts = accountService.listOfUserAccounts();
         model.addAttribute("useraccounts", userAccounts);
 
-        // Pagination
-        Page<Transaction> page1 = transactionService.pagination(user, pageNo, pageSize);
+        //recuperation liste des contacts
+        List<Contact> contacts = contactService.listOfContacts(user);
+        model.addAttribute("contacts", contacts);
+
+        //Pagination
+        /*Page<Transaction> page1 = transactionService.pagination(user, pageNo, pageSize);
         List<Transaction> listTransactions = page1.getContent();
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page1.getTotalPages());
         model.addAttribute("totalItems", page1.getTotalElements());
+        model.addAttribute("transactions", listTransactions);
+        model.addAttribute("transaction", new TransactionDto());*/
+        List<Transaction> listTransactions = new ArrayList<>();
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", 0);
+        model.addAttribute("totalItems", 0);
         model.addAttribute("transactions", listTransactions);
         model.addAttribute("transaction", new TransactionDto());
         return "transaction";

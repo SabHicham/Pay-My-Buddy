@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+
 
 @AllArgsConstructor
 @Getter
@@ -30,8 +30,10 @@ public class User {
 
     private String password;
 
-    @OneToMany()
-    List<Account> accounts;
+    private Double sold;
+
+    //@OneToMany()
+    //List<Account> accounts;
 
     public User() {
 

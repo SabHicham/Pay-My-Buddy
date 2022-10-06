@@ -36,7 +36,6 @@ public class AccountController {
     public String registerUserAccount(@ModelAttribute("account") AccountDto accountDto) {
         // create
         Account account = accountMapper.toEntity(accountDto);
-        account.setUserAccount(true);
         accountService.createAccount(account);
         return "redirect:/home";
     }

@@ -10,5 +10,4 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
 
     Account findByIban(String iban);
 
-    List<Account> findByUserAccountIsTrue();
 }

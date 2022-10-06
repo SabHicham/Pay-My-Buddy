@@ -17,9 +17,19 @@ public class MainController {
         return "login";
     }
 
+    @GetMapping("/home")
+    public String home(){
+        return "home" ;
+    }
+
+    @GetMapping("/profile")
+    public String profile(){
+        return "profile" ;
+    }
+
     @GetMapping("/")
-    public String home() {
-        return "index";
+    public String index() {
+        return "redirect:/home";
     }
 
     @GetMapping("/access-denied")

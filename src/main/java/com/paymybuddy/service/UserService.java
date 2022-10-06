@@ -10,4 +10,6 @@ public interface UserService extends UserDetailsService {
     User save(UserDto registrationDto);
 
     User findUser();
+
+    User createUser(User user);
 }
