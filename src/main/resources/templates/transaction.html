@@ -2,20 +2,35 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" th:href="@{/css/styleTransaction.css}"/>
+    <!--codePen button-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <title>transaction</title>
 </head>
 <body>
+<!--topnav codePen-->
+<div class="topnav">
+    <b class="active" href="#home">Pay My Buddy</b>
+    <a class="active" href="/login?logout">Déconnexion</a>
+    <a href="/contact">Amis</a>
+    <a href="/profile">Profil</a>
+    <a href="/transaction">Transfert</a>
+    <a href="/home">Accueil</a>
+</div>
+<br>
 
+<button class="custom-btn btn-13">MON SOLDE:</button>
 <!--Envoi d'argent-->
-<h2>Envoi d'argent</h2>
+<div class="containerT"><h2>Envoi d'argent</h2></div>
+
 <ul class="responsive-table">
-    <li class="table-row">
+
         <form th:action="@{/transaction}" method="post" th:object="${transaction}">
-        <div class="col col-1" data-label=""><label for="contact">Mes amis</label>
+            <li class="table-row">
+        <div class="col col-2" data-label=""><label for="contact">Amis</label>
             <input hidden th:value="${emitter1.email}" name="emitterEmail"/>
             <input list="amis" id="contact" name="receiverEmail"/>
 
@@ -25,19 +40,22 @@
                     </option>
                 </select>
             </datalist></div>
-        <div class="col col-2" data-label=""><label for="amount">montant</label>
+        <div class="col col-3" data-label=""><label for="amount">Montant à Envoyer&emsp;&emsp;</label>
             <input type="number" id="amount" name="amount"
                    min="1" max="100000"></div>
-        <div class="col col-3" data-label=""><label for="description">Description</label>
+        <div class="col col-3" data-label=""><label for="description">Description&emsp;&emsp;&emsp;&emsp;&emsp;</label>
             <input type="text" id="description" name="description"></div>
-        <div class="col col-4" data-label=""><div class="topnav"> <input type="submit" class="btn btn-success offset-md-10" value="Envoyer"></div></div>
+        <div class="col col-4" data-label=""><div class=""> <input type="submit" class="btn btn-success offset-md-10" value="Envoyer"></div></div>
         </form>
     </li>
 </ul>
 
+
 <!--Mes transaction-->
+<div class="containerT"><h2>Mes Transactions</h2></div>
+
 <div class="container">
-    <h2>Mes Transactions</h2>
+
     <ul class="responsive-table">
         <li class="table-header">
 
@@ -45,23 +63,15 @@
             <div class="col col-3">SOMME</div>
             <div class="col col-4">Description</div>
         </li>
-        <li class="table-row">
-            <div class="col col-2" data-label="Amis">
 
-            </div>
-            <div class="col col-3" data-label="Somme">$50</div>
-            <div class="col col-4" data-label="Description">écharpe</div>
+
+        <li class="table-row" th:each="transaction:${transactions}">
+
+           <div class="col col-2" data-label="Amis" th:text="${transaction.receiver.firstName}"></div>
+            <div class="col col-3" data-label="Somme" th:text="${transaction.amount}"></div>
+            <div class="col col-4" data-label="Description" th:text="${transaction.description}"></div>
         </li>
-        <li class="table-row">
-            <div class="col col-2" data-label="Amis">Eren Jager</div>
-            <div class="col col-3" data-label="Somme">$350</div>
-            <div class="col col-4" data-label="Description">Équipement tridimensionnel </div>
-        </li>
-        <li class="table-row">
-            <div class="col col-2" data-label="Amis">Seig Jager</div>
-            <div class="col col-3" data-label="Somme">$80</div>
-            <div class="col col-4" data-label="Description">Lunettes</div>
-        </li>
+
 
     </ul>
 </div>

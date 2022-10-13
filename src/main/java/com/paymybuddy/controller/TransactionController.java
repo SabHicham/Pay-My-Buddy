@@ -77,6 +77,10 @@ public class TransactionController {
         List<Contact> contacts = contactService.listOfContacts(user);
         model.addAttribute("contacts", contacts);
 
+        // liste des transactions
+        List<Transaction> transactions = transactionService.findAll();
+        model.addAttribute("transactions", transactions);
+
         //Pagination
         /*Page<Transaction> page1 = transactionService.pagination(user, pageNo, pageSize);
         List<Transaction> listTransactions = page1.getContent();
@@ -89,7 +93,7 @@ public class TransactionController {
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", 0);
         model.addAttribute("totalItems", 0);
-        model.addAttribute("transactions", listTransactions);
+
         model.addAttribute("transaction", new TransactionDto());
         return "transaction";
 

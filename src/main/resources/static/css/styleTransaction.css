@@ -27,26 +27,27 @@ h2 small {
   margin-bottom: 25px;
 }
 .responsive-table .table-header {
-  background-color: #00FA9A;
+  background-color: #04AA6D;
+  color: #fff;
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }
 .responsive-table .table-row {
   background-color: #ffffff;
-  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 5px 5px 9px 2px rgba(0, 0, 0, 0.1);
 }
 .responsive-table .col-1 {
-  flex-basis: 10%;
+  flex-basis: 15%;
 }
 .responsive-table .col-2 {
-  flex-basis: 40%;
+  flex-basis: 35%;
 }
 .responsive-table .col-3 {
-  flex-basis: 25%;
+  flex-basis: 20%;
 }
 .responsive-table .col-4 {
-  flex-basis: 25%;
+  flex-basis: 30%;
 }
 @media all and (max-width: 767px) {
   .responsive-table .table-header {
@@ -81,4 +82,75 @@ h2 small {
 .topnav a.active {
   background-color: #04AA6D;
   color: white;
+}
+/*codePen button sold */
+
+.custom-btn {
+  width: 130px;
+  height: 100px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+/* 13 */
+.btn-13 {
+  background-color: #89d8d3;
+background-image: linear-gradient(315deg, #89d8d3 0%, #04AA6D 74%);
+  border: none;
+  z-index: 1;
+}
+.btn-13:after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  border-radius: 5px;
+   background-color: #4dccc6;
+background-image: linear-gradient(315deg, #04AA6D 26%, #96e4df 74%);
+  box-shadow:
+   -7px -7px 20px 0px #fff9,
+   -4px -4px 5px 0px #fff9,
+   7px 7px 20px 0px #0002,
+   4px 4px 5px 0px #0001;
+  transition: all 0.3s ease;
+}
+.btn-13:hover {
+  color: #fff;
+}
+.btn-13:hover:after {
+  top: 0;
+  height: 100%;
+}
+.btn-13:active {
+  top: 2px;
+}
+
+/*header h2*/
+.containerT{
+  display: flex;
+  color: #fff;
+}
+h2 {
+  color: #fff;
+  border: 1px solid #04AA6D;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+  font-weight: normal;
+  background: #04AA6D;
+  margin: auto;
 }

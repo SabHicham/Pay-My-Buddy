@@ -1,6 +1,7 @@
 package com.paymybuddy.service.impl;
 
 import com.paymybuddy.model.Account;
+import com.paymybuddy.model.Bank;
 import com.paymybuddy.model.Transaction;
 import com.paymybuddy.model.User;
 import com.paymybuddy.repository.AccountRepository;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -51,6 +53,11 @@ public class TransactionServiceImpl implements TransactionService {
                  //   throw new Exception("Not enough money on account");
                 }
 
+    }
+
+    @Override
+    public List<Transaction> findAll() {
+        return transactionRepository.findAll();
     }
 
 

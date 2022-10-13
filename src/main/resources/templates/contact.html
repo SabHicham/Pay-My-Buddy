@@ -10,7 +10,7 @@
     <title>contact</title>
 </head>
 <body>
-
+<!--topnav codePen-->
 <div class="topnav">
     <b class="active" href="#home">Pay My Buddy</b>
     <a class="active" href="/login?logout">Déconnexion</a>
@@ -51,19 +51,19 @@
 
             <div class="form-group">
                 <label class="control-label" for="firstName"> Prenom </label>
-                <input id="firstName" class="form-control" th:field="*{firstName}"
+                <input id="firstName" class="form-control" th:field="${emitter.firstName}"
                        required autofocus="autofocus" />
             </div>
 
             <div class="form-group">
                 <label class="control-label" for="lastName"> Nom </label><input
-                    id="lastName" class="form-control" th:field="*{lastName}"
+                    id="lastName" class="form-control" th:field="${emitter.lastName}"
                     required autofocus="autofocus" />
             </div>
 
             <div class="form-group">
                 <label class="control-label" for="email"> Email </label><input
-                    id="email" class="form-control" th:field="*{email}"
+                    id="email" class="form-control" th:field="${emitter.email}"
                     required autofocus="autofocus" />
             </div>
 
@@ -89,7 +89,7 @@
 
 
             <div class="form-group">
-                <button type="submit" class="btn btn-success">Register</button>
+                <button type="submit" class="btn btn-success offset-md-10">Register</button>
             </div>
 
         </form>
