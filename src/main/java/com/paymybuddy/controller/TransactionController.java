@@ -5,7 +5,6 @@ import com.paymybuddy.dto.CreditDto;
 import com.paymybuddy.dto.TransactionDto;
 import com.paymybuddy.mapper.TransactionMapper;
 import com.paymybuddy.model.Account;
-import com.paymybuddy.model.Contact;
 import com.paymybuddy.model.Transaction;
 import com.paymybuddy.model.User;
 import com.paymybuddy.service.AccountService;
@@ -13,7 +12,6 @@ import com.paymybuddy.service.ContactService;
 import com.paymybuddy.service.TransactionService;
 import com.paymybuddy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -85,8 +83,13 @@ public class TransactionController {
         model.addAttribute("contacts", contacts);
 
         // liste des transactions
-        List<Transaction> transactions = transactionService.findAll();
+        List<Transaction> transactions = transactionService.findByEmitter(user);
         model.addAttribute("transactions", transactions);
+
+        //recuperation du solde;
+        Double userSold = userService.findUser().getSold();
+        model.addAttribute("userSold", userSold);
+
 
         //Pagination
         /*Page<Transaction> page1 = transactionService.pagination(user, pageNo, pageSize);

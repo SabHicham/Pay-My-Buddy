@@ -1,6 +1,5 @@
 package com.paymybuddy.service;
 
-import com.paymybuddy.model.Bank;
 import com.paymybuddy.model.Transaction;
 import com.paymybuddy.model.User;
 import org.springframework.data.domain.Page;
@@ -15,6 +14,7 @@ public interface TransactionService {
 
     void transfetMoneyFromBank(int amount);
 
-    List<Transaction> findAll();
+    List<Transaction> findByEmitter(User user);
+
     Page<Transaction> pagination(User user, int pageNo, int pageSize);
 }
