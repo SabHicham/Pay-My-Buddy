@@ -1,5 +1,7 @@
 package com.paymybuddy.controller;
 
+import com.paymybuddy.dto.ContactDto;
+import com.paymybuddy.dto.CreditDto;
 import com.paymybuddy.dto.TransactionDto;
 import com.paymybuddy.mapper.TransactionMapper;
 import com.paymybuddy.model.Account;
@@ -12,12 +14,11 @@ import com.paymybuddy.service.TransactionService;
 import com.paymybuddy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -47,6 +48,12 @@ public class TransactionController {
         transactionService.createTransaction(transactionMapper.toEntity(transactionDto));
         return "redirect:/transaction";
     }
+    @PostMapping(value = "/crediter")
+    public String crediterUserAcount(@ModelAttribute("credit") CreditDto creditDto) throws Exception {
+        //create
+        transactionService.transfetMoneyFromBank(creditDto.getAmount());
+        return "redirect:/transaction";
+    }
     @GetMapping
     public String showTransferForm(HttpServletRequest request, Model model) {
         int pageSize = 5;
@@ -74,7 +81,7 @@ public class TransactionController {
         model.addAttribute("useraccounts", userAccounts);
 
         //recuperation liste des contacts
-        List<Contact> contacts = contactService.listOfContacts(user);
+        List<ContactDto> contacts = contactService.listOfContacts(user);
         model.addAttribute("contacts", contacts);
 
         // liste des transactions
@@ -97,5 +104,10 @@ public class TransactionController {
         model.addAttribute("transaction", new TransactionDto());
         return "transaction";
 
+    }
+    @PutMapping(value = "/transferMoneyToBank", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    private Transaction transferMoneyToBank(@RequestBody Transaction transaction , Authentication authentication) {
+        return transactionService.transferMoneyToBank(transaction, authentication);
     }
 }

@@ -15,17 +15,13 @@ import javax.persistence.*;
 public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String iban;
+    private long id;
     @ManyToOne()
-    @JoinColumn(name = "userId", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
     @ManyToOne()
-    @JoinColumn(name = "bankId", referencedColumnName = "id")
-    private Bank bank;
+    @JoinColumn(name = "friend_id", referencedColumnName = "id")
+    private User friend;
 
     public Contact(){
 

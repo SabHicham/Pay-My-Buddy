@@ -3,10 +3,10 @@ package com.paymybuddy.service.impl;
 
 import com.paymybuddy.dto.UserDto;
 import com.paymybuddy.mapper.UserMapper;
-import com.paymybuddy.model.Bank;
 import com.paymybuddy.model.User;
 import com.paymybuddy.repository.AccountRepository;
 import com.paymybuddy.repository.BankRepository;
+import com.paymybuddy.repository.ContactRepository;
 import com.paymybuddy.repository.UserRepository;
 import com.paymybuddy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 
+
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
@@ -27,6 +28,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private BankRepository bankRepository;
+
 
     @Autowired
     private AccountRepository accountRepository;
@@ -54,6 +56,12 @@ public class UserServiceImpl implements UserService {
     }
 
 
+
+
+
+
+
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
@@ -70,4 +78,6 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
+
+
 }

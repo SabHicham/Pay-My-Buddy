@@ -1,8 +1,8 @@
 package com.paymybuddy.controller;
 
 import com.paymybuddy.dto.AccountDto;
+import com.paymybuddy.dto.ContactDto;
 import com.paymybuddy.dto.UserDto;
-import com.paymybuddy.mapper.AccountMapper;
 import com.paymybuddy.mapper.UserMapper;
 import com.paymybuddy.model.Bank;
 import com.paymybuddy.model.Contact;
@@ -35,14 +35,14 @@ public class ContactController {
     private ContactService contactService;
 
     @PostMapping
-    public String registerContact(@ModelAttribute("contact") UserDto userDto) {
+    public String registerContact(@ModelAttribute("contact") ContactDto contactDto) {
         //create
-        userService.createUser(userMapper.toEntity(userDto));
+        contactService.saveFriend(contactDto);
         return "redirect:/transaction";
     }
     @ModelAttribute("contact")
-    public AccountDto accountDto() {
-        return new AccountDto();
+    public ContactDto contactDto() {
+        return new ContactDto();
     }
 
     @GetMapping
@@ -56,8 +56,11 @@ public class ContactController {
         model.addAttribute("emitter", user);
 
         //recuperation liste des contacts
-        List<Contact> contacts = contactService.listOfContacts(user);
+        List<ContactDto> contacts = contactService.listOfContacts(user);
         model.addAttribute("contacts", contacts);
+
+        //recuperation
+
 
         return "contact";
     }

@@ -4,6 +4,8 @@ import com.paymybuddy.dto.UserDto;
 import com.paymybuddy.model.User;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserMapper implements Mapper<User, UserDto>{
 
@@ -14,6 +16,6 @@ public class UserMapper implements Mapper<User, UserDto>{
 
     @Override
     public UserDto toDTO(User user) {
-        return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(), user.getSold());
+        return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(), user.getSold(), "");
     }
 }
