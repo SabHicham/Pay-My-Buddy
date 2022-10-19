@@ -24,19 +24,19 @@ import java.util.ArrayList;
 @Transactional
 public class UserServiceImpl implements UserService {
     @Autowired
-    private UserRepository userRepository;
+    public UserRepository userRepository;
 
     @Autowired
-    private BankRepository bankRepository;
+    public BankRepository bankRepository;
 
 
     @Autowired
-    private AccountRepository accountRepository;
+    public AccountRepository accountRepository;
 
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    public BCryptPasswordEncoder passwordEncoder;
     @Autowired
-    private UserMapper userMapper;
+    public UserMapper userMapper;
 
     @Override
     public User findUser() {

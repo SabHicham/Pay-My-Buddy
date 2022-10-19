@@ -1,41 +1,54 @@
-package com.paymybuddy.service;
+package com.paymybuddy.service.impl;
 
 
+import com.paymybuddy.dto.UserDto;
+import com.paymybuddy.mapper.UserMapper;
 import com.paymybuddy.model.User;
 import com.paymybuddy.repository.UserRepository;
-import com.paymybuddy.service.impl.UserServiceImpl;
+import com.paymybuddy.service.UserService;
 import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-@RunWith(MockitoJUnitRunner.class)
 
-public class UserServiceTest {
+
+@ExtendWith(MockitoExtension.class)
+public class UserServiceImplTest {
     @Mock
     private Authentication auth;
-
     @InjectMocks
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Mock
     private UserRepository userRepository;
 
     @Mock
+    private UserMapper userMapper;
+
+    @Mock
     BCryptPasswordEncoder passwordEncoder;
+
+    /*@BeforeEach
+    private void setUp() {
+        userService = new UserServiceImpl();
+        userService.userRepository=userRepository;
+        userService.userMapper=userMapper;
+        userService.passwordEncoder=passwordEncoder;
+    }*/
 
     @Test
     public void testPassword() {
@@ -49,14 +62,14 @@ public class UserServiceTest {
     @Test
     public void shouldThrowExceptionWhenUserEmailOrPasswordAreInvalid() throws Exception {
         //given
-       // User user = new User(9, "Hicham", "Jager", "hicham@email.com", "10000");
+        User user = new User(9, "Hicham", "AZZEDDINE", "hicham@email.com", "1234", 10000.0);
 
         try {
             when(userService.loadUserByUsername(anyString())).thenThrow(new UsernameNotFoundException("Invalid username or password."));
-        //    when(userRepository.findByEmail(user.getEmail())).thenReturn(null);
+            //    when(userRepository.findByEmail(user.getEmail())).thenReturn(null);
 
             //when
-       //     userService.loadUserByUsername(user.getEmail());
+            //     userService.loadUserByUsername(user.getEmail());
         } catch (UsernameNotFoundException e) {
 
             //then
@@ -85,15 +98,15 @@ public class UserServiceTest {
     public void shouldReturnUserWhenUserSave() {
 
         //given
-        //User user = new User(9, "Hicham", "Jager", "hicham@email.com", "10000");
-        //String result = passwordEncoder.encode("123456");
-        //when(userService.save(user)).thenReturn(user);
+        when(userMapper.toEntity(any())).thenReturn(new User());
+        when(passwordEncoder.encode(any())).thenReturn( "");
+        when(userRepository.save(any())).thenReturn(new User());
 
         //when
-        //User userCreated = userService.save(user);
+        User userCreated = userService.save(new UserDto());
 
         //then
-        //assertThat(userCreated.getPassword()).isEqualTo(result);
+        assertNotNull(userCreated);
 
 
     }

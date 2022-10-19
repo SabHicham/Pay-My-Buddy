@@ -29,16 +29,16 @@ import java.util.List;
 public class TransactionServiceImpl implements TransactionService {
 
     @Autowired
-    private TransactionRepository transactionRepository;
+    public TransactionRepository transactionRepository;
 
     @Autowired
-    private AccountRepository accountRepository;
+    public AccountRepository accountRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    public UserRepository userRepository;
 
     @Autowired
-    private BankRepository bankRepository;
+    public BankRepository bankRepository;
 
 
     @Override

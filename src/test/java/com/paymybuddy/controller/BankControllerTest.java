@@ -36,14 +36,14 @@ public class BankControllerTest {
     @Test
     public void shouldSaveABank() throws Exception {
 
-        //given
-      //  BankDto bankDto = new BankDto(1, "CIC", "123 Street", "77500", "Chelles");
+        // given
+        BankDto bankDto = new BankDto(1, "CIC");
 
         //then
-        //mockMvc.perform(post("/bankregistration")
-          //              .flashAttr("bankregistration", bankDto))
-           //     .andDo(MockMvcResultHandlers.print())
-             //   .andExpect(status().isFound())
-              //  .andExpect(redirectedUrl("/home"));
+        mockMvc.perform(post("/bankregistration")
+                        .flashAttr("bankregistration", bankDto))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isFound())
+                .andExpect(redirectedUrl("/home"));
     }
 }

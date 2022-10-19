@@ -1,4 +1,4 @@
-package com.paymybuddy.service;
+package com.paymybuddy.service.impl;
 
 
 import com.paymybuddy.model.Bank;
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 @AutoConfigureMockMvc
 @RunWith(MockitoJUnitRunner.class)
-public class BankServiceTest {
+public class BankServiceImplTest {
 
     @InjectMocks
     private BankServiceImpl bankService;
@@ -32,10 +32,8 @@ public class BankServiceTest {
         //given
         Bank bank = new Bank();
         bank.setId(1);
-        bank.setName("LCL Melun Nord");
-       // bank.setAddress("12 rue des oiseaux");
-        //bank.setZip("77000");
-        //bank.setCity("Melun");
+        bank.setName("CIC");
+
 
         when(bankRepository.findByName(bank.getName())).thenReturn(bank);
         when(bankRepository.save(bank)).thenReturn(bank);
@@ -44,10 +42,8 @@ public class BankServiceTest {
         Bank createdBank = bankService.createAccount(bank);
 
         //then
-        assertThat(createdBank.getName()).isEqualTo("LCL Melun Nord");
-       // assertThat(createdBank.getAddress()).isEqualTo("12 rue des oiseaux");
-        //assertThat(createdBank.getZip()).isEqualTo("77000");
-        //assertThat(createdBank.getCity()).isEqualTo("Melun");
+        assertThat(createdBank.getName()).isEqualTo("CIC");
+
     }
 
     @Test
@@ -56,10 +52,7 @@ public class BankServiceTest {
         //given
         Bank bank = new Bank();
         bank.setId(1);
-        bank.setName("LCL Melun Nord");
-       // bank.setAddress("12 rue des oiseaux");
-       // bank.setZip("77000");
-       // bank.setCity("Melun");
+        bank.setName("CIC");
 
         when(bankRepository.findByName(bank.getName())).thenReturn(null);
         when(bankRepository.save(bank)).thenReturn(bank);
@@ -68,9 +61,7 @@ public class BankServiceTest {
         Bank createdBank = bankService.createAccount(bank);
 
         //then
-        assertThat(createdBank.getName()).isEqualTo("LCL Melun Nord");
-       // assertThat(createdBank.getAddress()).isEqualTo("12 rue des oiseaux");
-       // assertThat(createdBank.getZip()).isEqualTo("77000");
-       // assertThat(createdBank.getCity()).isEqualTo("Melun");
+        assertThat(createdBank.getName()).isEqualTo("CIC");
+
     }
 }

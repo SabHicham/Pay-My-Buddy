@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/styleTransaction.css}"/>
+    <!--codePen button-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
@@ -17,7 +19,12 @@
     <a href="/transaction">Transfert</a>
     <a href="/home">Accueil</a>
 </div>
-<h1>mon solde</h1>
+
+<button class="custom-btn btn-13">MON SOLDE: <span th:text ="${userSold}"></span></button>
+
+
+
+
 
 <div style="height:150px;"></div>
 <div class="offset-md-3">
