@@ -1,29 +1,32 @@
 package com.paymybuddy.service.impl;
 
 import com.paymybuddy.dto.ContactDto;
+import com.paymybuddy.mapper.ContactMapper;
 import com.paymybuddy.model.Bank;
 import com.paymybuddy.model.Contact;
 import com.paymybuddy.model.User;
 import com.paymybuddy.repository.ContactRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import com.paymybuddy.repository.UserRepository;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-@RunWith(MockitoJUnitRunner.class)
 
+@ExtendWith(MockitoExtension.class)
 public class ContactServiceImplTest {
 
     @InjectMocks
@@ -31,6 +34,24 @@ public class ContactServiceImplTest {
 
     @Mock
     private ContactRepository contactRepository;
+
+    @Mock
+    private UserRepository userRepository;
+
+    @Mock
+    private ContactMapper contactMapper;
+    @Mock
+    private SecurityContext context;
+
+    @Mock
+    private Authentication authentication;
+
+    @BeforeEach
+    private void setUp() {
+        contactService.context=context;
+    }
+
+
 
     @Test()
     public void shouldThrowExceptionWhenUserIsInDatabase() throws Exception {
@@ -44,50 +65,68 @@ public class ContactServiceImplTest {
             contactService.createContact(contact);
         } catch (Exception e) {
 
-            assertThat(e instanceof Exception).isEqualTo(true);
+            assertTrue(e instanceof Exception);
         }
     }
 
     @Test
-    public void ShouldReturnListOfContacts() {
+    public void listOfContactsTest() {
         //given
         User user = new User(9,"hicham", "jager", "hicham@email.com", "1234", 1000.0);
         Bank bank = new Bank(1, "CIC");
-        Contact contact = new Contact(1, any(), any());
-        List<Contact> contacts = Collections.singletonList(contact);
-        when(contactRepository.findByuserId(user.getId())).thenReturn(contacts);
+        ContactDto contact = new ContactDto();
+        List<ContactDto> contacts = Collections.singletonList(contact);
+        when(contactRepository.findByuserId(user.getId())).thenReturn(Arrays.asList(new Contact()));
+        when(contactMapper.toDTO(any())).thenReturn(new ContactDto());
 
         //when
         List<ContactDto> listofContacts = contactService.listOfContacts(user);
 
         //then
-        assertThat(listofContacts).isEqualTo(contacts);
+        assertEquals(listofContacts, contacts);
 
     }
 
     @Test
-    public void testCreateAccountShouldReturnAccountForNewAccount() throws Exception {
+    public void createContactTest() throws Exception {
 
         //given
-        User user = new User(9,"hicham", "jager", "hicham@email.com", "1234", 1000.0);
+        User user = new User(9,"hicham", "jager", null, "1234", 1000.0);
         Bank bank = new Bank(1 , "CIC");
 
         Contact contact = new Contact();
-        contact.setUser(any());
-        contact.setUser(any());
         contact.setUser(user);
-        contact.setUser(any());
-        contact.setFriend(any());
         when(contactRepository.save(contact)).thenReturn(contact);
+        when(userRepository.findById(any())).thenReturn(Optional.of(user));
 
         //when
         Contact createdContact = contactService.createContact(contact);
 
         //then
-        assertThat(createdContact).isEqualTo(contact);
-        //assertThat(createdContact).isEqualTo("bb123456789");
-        //assertThat(createdContact.getUser().getLastName()).isEqualTo("doe");
-        //assertThat(createdContact.getLastName()).isEqualTo("doe");
-        //assertThat(createdContact.getEmail()).isEqualTo("john.doe@gmail.com");
+        assertEquals(createdContact.getUser().getFirstName(), "hicham");
+        assertEquals(createdContact.getUser().getLastName(), "jager");
+
+    }
+
+    @Test
+    public void saveFriendTest() throws Exception {
+
+        //given
+        User user = new User(9,"hicham", "jager", null, "1234", 1000.0);
+        Bank bank = new Bank(1 , "CIC");
+
+        Contact contact = new Contact();
+        contact.setUser(user);
+        when(context.getAuthentication()).thenReturn(authentication);
+        when(authentication.getName()).thenReturn("");
+        when(userRepository.findByEmail(any())).thenReturn(user);
+
+
+        //when
+        contactService.saveFriend(new ContactDto());
+
+        //then
+
+
     }
 }

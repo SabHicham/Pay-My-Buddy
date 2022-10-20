@@ -89,9 +89,5 @@ public class TransactionController {
         return "transaction";
 
     }
-    @PutMapping(value = "/transferMoneyToBank", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    private Transaction transferMoneyToBank(@RequestBody Transaction transaction , Authentication authentication) {
-        return transactionService.transferMoneyToBank(transaction, authentication);
-    }
+
 }

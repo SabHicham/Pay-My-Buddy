@@ -10,6 +10,7 @@ import com.paymybuddy.repository.ContactRepository;
 import com.paymybuddy.repository.UserRepository;
 import com.paymybuddy.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,8 @@ public class ContactServiceImpl implements ContactService {
 
     @Autowired
     private UserRepository userRepository;
+
+    public SecurityContext context = SecurityContextHolder.getContext();
 
     @Override
     public List<ContactDto> listOfContacts(User user) {
@@ -52,7 +55,7 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public void saveFriend(ContactDto contactDto) {
-        User userConnected = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        User userConnected = userRepository.findByEmail(context.getAuthentication().getName());
         User userToSave = userRepository.findByEmail(contactDto.getEmail());
         //check if userDto exist
         //check if userDto already friend

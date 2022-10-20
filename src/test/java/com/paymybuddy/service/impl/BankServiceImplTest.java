@@ -3,20 +3,29 @@ package com.paymybuddy.service.impl;
 
 import com.paymybuddy.model.Bank;
 import com.paymybuddy.repository.BankRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-@RunWith(MockitoJUnitRunner.class)
+
+
+
+@ExtendWith(MockitoExtension.class)
 public class BankServiceImplTest {
 
     @InjectMocks
@@ -41,7 +50,7 @@ public class BankServiceImplTest {
         Bank createdBank = bankService.createAccount(bank);
 
         //then
-        assertThat(createdBank.getName()).isEqualTo("CIC");
+        assertEquals(createdBank.getName(),"CIC");
 
     }
 
@@ -60,7 +69,24 @@ public class BankServiceImplTest {
         Bank createdBank = bankService.createAccount(bank);
 
         //then
-        assertThat(createdBank.getName()).isEqualTo("CIC");
+        assertEquals(createdBank.getName(), "CIC");
+
+    }
+    @Test
+    public void findAllBankTest() {
+
+        //given
+        Bank bank = new Bank();
+        bank.setId(1);
+        bank.setName("CIC");
+
+        when(bankRepository.findAll()).thenReturn(Arrays.asList(bank));
+
+        //when
+        List<Bank> banks = bankService.findAll();
+
+        //then
+        assertEquals(banks.get(0).getName(), "CIC");
 
     }
 }

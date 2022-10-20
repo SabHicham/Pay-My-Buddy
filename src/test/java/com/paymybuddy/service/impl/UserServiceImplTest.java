@@ -46,14 +46,7 @@ public class UserServiceImplTest {
         userService.context=context;
     }
 
-    /*@Test
-    public void testPassword() {
-        when(auth.getCredentials()).thenReturn("mockedPassword");
-        SecurityContextHolder.getContext().setAuthentication(auth);
-        //Access  getCredentials() which should return the mocked password
-        SecurityContextHolder.getContext().getAuthentication().getCredentials();
-        SecurityContextHolder.clearContext();
-    }*/
+
     @Test
     public void createUserTest(){
         //given
@@ -140,6 +133,21 @@ public class UserServiceImplTest {
 
         //then
         assertNotNull(userCreated);
+
+
+    }
+    @Test
+    public void loadUserByUsernameReturnTest() {
+
+        //given
+
+        when(userRepository.findByEmail(any())).thenReturn(new User(1, "a", "a", "a", "a", 10.0));
+
+        //when
+        userService.loadUserByUsername("a");
+
+
+        //then
 
 
     }

@@ -5,20 +5,17 @@ import com.paymybuddy.model.Transaction;
 import com.paymybuddy.model.User;
 import com.paymybuddy.repository.TransactionRepository;
 import com.paymybuddy.repository.UserRepository;
+import org.apache.commons.collections.list.TransformedList;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.util.Optional;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -34,6 +31,17 @@ public class TransactionServiceImplTest {
 
     @Mock
     private UserRepository userRepository;
+
+    @Mock
+    private SecurityContext context;
+
+    @Mock
+    private Authentication authentication;
+
+    @BeforeEach
+    private void setUp() {
+        transactionService.context=context;
+    }
 
 
     @Test
@@ -53,7 +61,7 @@ public class TransactionServiceImplTest {
     }
 
     @Test
-    public void testCreateTransactionShouldReturnTransactionForNewTransactionAndUpdateSoldForReceiverIsEqualEmitter() throws Exception {
+    public void testCreateTransaction() throws Exception {
 
         //given
         User emitter = new User(1, "eren", "jager", "eren@email.com","1234", 350.0);
@@ -92,7 +100,7 @@ public class TransactionServiceImplTest {
     }
 
     @Test
-    public void testCreateTransactionShouldReturnTransactionForNewTransactionForReceiverNotEqualEmitter() throws Exception {
+    public void createTransactionTest() throws Exception {
 
         //given
         User userEmitter = new User(1, "eren", "jager", "eren@gmail.com", "1234", 1100.0);
@@ -127,4 +135,82 @@ public class TransactionServiceImplTest {
         assertEquals(createdTransaction.getReceiver().getSold(), 99.6);
         assertEquals(createdTransaction.getEmitter().getLastName(), "jager");
     }
+    @Test
+    public void testCreateTransactionReturnNull() throws Exception {
+
+        //given
+        User emitter = new User(1, "eren", "jager", "eren@email.com","1234", 350.0);
+        User receiver = new User(1, "eren", "jager", "hicham@email.com","1234", 350.0);
+        Bank bank = new Bank(0,  "CIC");
+
+
+        Transaction transaction = new Transaction();
+        transaction.setEmitter(emitter);
+        User user = new User();
+        transaction.setDescription("cinema");
+        transaction.setAmount(100);
+        transaction.setEmitterEmail("eren@email.com");
+        transaction.setReceiverEmail("hicham@email.com");
+        transaction.setReceiver(receiver);
+        transaction.setEmitter(emitter);
+
+        when(userRepository.findByEmail("eren@email.com")).thenReturn(emitter);
+        when(userRepository.findByEmail("hicham@email.com")).thenReturn(emitter);
+
+
+
+        //when
+        Transaction createdTransaction = transactionService.createTransaction(transaction);
+
+
+
+        //then
+
+        assertNull(createdTransaction);
+    }
+
+    @Test
+    public void findByEmitterTest(){
+        //given
+        User user = new User(9,"hicham", "jager", "hicham@email.com", "1234", 1000.0);
+        List<Transaction> transactions = transactionService.findByEmitter(user);
+        when(transactionRepository.findByEmitter(any())).thenReturn(transactions);
+
+        //when
+        List<Transaction> findByEmitter = transactionService.findByEmitter(user);
+        //then
+        assertNotEquals(findByEmitter, user);
+    }
+
+    @Test
+    public void transfetMoneyFromBankTest(){
+        //given
+        User user = new User(9,"hicham", "jager", "hicham@email.com", "1234", 1000.0);
+        when(context.getAuthentication()).thenReturn(authentication);
+        when(authentication.getName()).thenReturn("");
+
+        when(userRepository.findByEmail(any())).thenReturn(user);
+
+        //when
+        transactionService.transfetMoneyFromBank(10);
+        //then
+
+    }
+
+    @Test
+    public void transfetMoneyFromBankTest2(){
+        //given
+        User user = new User(9,"hicham", "jager", "hicham@email.com", "1234", 1000.0);
+        when(context.getAuthentication()).thenReturn(authentication);
+        when(authentication.getName()).thenReturn("");
+
+        when(userRepository.findByEmail(any())).thenReturn(user);
+
+        //when
+        transactionService.transfetMoneyFromBank(-1);
+        //then
+
+    }
+
+
 }
