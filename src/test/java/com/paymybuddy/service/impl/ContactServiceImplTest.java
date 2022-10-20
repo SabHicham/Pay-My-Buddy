@@ -5,7 +5,6 @@ import com.paymybuddy.model.Bank;
 import com.paymybuddy.model.Contact;
 import com.paymybuddy.model.User;
 import com.paymybuddy.repository.ContactRepository;
-import com.paymybuddy.service.impl.ContactServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

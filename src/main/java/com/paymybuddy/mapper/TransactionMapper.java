@@ -1,6 +1,5 @@
 package com.paymybuddy.mapper;
 
-import com.paymybuddy.dto.AccountDto;
 import com.paymybuddy.dto.TransactionDto;
 import com.paymybuddy.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +8,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class TransactionMapper implements Mapper<Transaction, TransactionDto> {
 
-    @Autowired
-    private AccountMapper accountMapper;
 
     @Autowired
     private UserMapper userMapper;

@@ -1,13 +1,9 @@
 package com.paymybuddy.controller;
 
-import com.paymybuddy.dto.AccountDto;
 import com.paymybuddy.dto.ContactDto;
-import com.paymybuddy.dto.UserDto;
 import com.paymybuddy.mapper.UserMapper;
 import com.paymybuddy.model.Bank;
-import com.paymybuddy.model.Contact;
 import com.paymybuddy.model.User;
-import com.paymybuddy.service.AccountService;
 import com.paymybuddy.service.BankService;
 import com.paymybuddy.service.ContactService;
 import com.paymybuddy.service.UserService;
@@ -23,8 +19,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/contact")
 public class ContactController {
-    @Autowired
-    private AccountService accountService;
     @Autowired
     private UserService userService;
     @Autowired
@@ -58,8 +52,6 @@ public class ContactController {
         //recuperation liste des contacts
         List<ContactDto> contacts = contactService.listOfContacts(user);
         model.addAttribute("contacts", contacts);
-
-        //recuperation
 
 
         return "contact";

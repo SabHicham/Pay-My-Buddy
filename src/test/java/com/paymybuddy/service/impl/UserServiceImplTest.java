@@ -1,37 +1,33 @@
 package com.paymybuddy.service.impl;
 
-
 import com.paymybuddy.dto.UserDto;
 import com.paymybuddy.mapper.UserMapper;
 import com.paymybuddy.model.User;
 import com.paymybuddy.repository.UserRepository;
-import com.paymybuddy.service.UserService;
-import org.junit.Test;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
+
 
 
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceImplTest {
     @Mock
-    private Authentication auth;
+    private SecurityContext context;
+
     @InjectMocks
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Mock
     private UserRepository userRepository;
@@ -40,23 +36,60 @@ public class UserServiceImplTest {
     private UserMapper userMapper;
 
     @Mock
-    BCryptPasswordEncoder passwordEncoder;
+    private BCryptPasswordEncoder passwordEncoder;
 
-    /*@BeforeEach
+    @Mock
+    private Authentication authentication;
+
+    @BeforeEach
     private void setUp() {
-        userService = new UserServiceImpl();
-        userService.userRepository=userRepository;
-        userService.userMapper=userMapper;
-        userService.passwordEncoder=passwordEncoder;
-    }*/
+        userService.context=context;
+    }
 
-    @Test
+    /*@Test
     public void testPassword() {
         when(auth.getCredentials()).thenReturn("mockedPassword");
         SecurityContextHolder.getContext().setAuthentication(auth);
         //Access  getCredentials() which should return the mocked password
         SecurityContextHolder.getContext().getAuthentication().getCredentials();
         SecurityContextHolder.clearContext();
+    }*/
+    @Test
+    public void createUserTest(){
+        //given
+        User user = new User(9, "Hicham", "AZZEDDINE", "hicham@email.com", "1234", 10000.0);
+        when(userRepository.findByEmail(any())).thenReturn(user);
+        when(userRepository.save(any())).thenReturn(user);
+        //when
+        User createUser = userService.createUser(new User());
+
+        //then
+        assertNotNull(createUser);
+    }
+    @Test
+    public void createUserTest2(){
+        //given
+        User user = new User(9, "Hicham", "AZZEDDINE", "hicham@email.com", "1234", 10000.0);
+        when(userRepository.findByEmail(any())).thenReturn(null);
+        when(userRepository.save(any())).thenReturn(user);
+        //when
+        User createUser = userService.createUser(new User());
+
+        //then
+        assertNotNull(createUser);
+    }
+
+    @Test
+    public void findUserTest(){
+        //given
+        when(context.getAuthentication()).thenReturn(authentication);
+        when(authentication.getName()).thenReturn("");
+        when(userRepository.findByEmail(any())).thenReturn(new User());
+
+        //when
+        User findUser = userService.findUser();
+        //then
+        assertNotNull(findUser);
     }
 
     @Test
@@ -65,7 +98,7 @@ public class UserServiceImplTest {
         User user = new User(9, "Hicham", "AZZEDDINE", "hicham@email.com", "1234", 10000.0);
 
         try {
-            when(userService.loadUserByUsername(anyString())).thenThrow(new UsernameNotFoundException("Invalid username or password."));
+            when(userService.loadUserByUsername(any())).thenThrow(new UsernameNotFoundException("Invalid username or password."));
             //    when(userRepository.findByEmail(user.getEmail())).thenReturn(null);
 
             //when
@@ -73,7 +106,7 @@ public class UserServiceImplTest {
         } catch (UsernameNotFoundException e) {
 
             //then
-            assertThat(e instanceof UsernameNotFoundException).isEqualTo(true);
+            assertTrue(e instanceof UsernameNotFoundException);
         }
     }
 
@@ -81,7 +114,7 @@ public class UserServiceImplTest {
     public void emptyRawPasswordDoesNotMatchPassword() {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String result = encoder.encode("password");
-        assertThat(encoder.matches("", result)).isFalse();
+        assertFalse(encoder.matches("", result));
     }
 
     @Test
@@ -89,8 +122,8 @@ public class UserServiceImplTest {
         // $2y is default version
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String result = encoder.encode("password");
-        assertThat(result.equals("password")).isFalse();
-        assertThat(encoder.matches("password", result)).isTrue();
+        assertFalse(result.equals("password"));
+        assertTrue(encoder.matches("password", result));
     }
 
 

@@ -5,9 +5,8 @@ package com.paymybuddy.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
-import java.util.List;
+
 
 
 @AllArgsConstructor
@@ -32,9 +31,6 @@ public class User {
     private String password;
 
     private Double sold;
-
-    //@OneToMany()
-    //List<Account> accounts;
 
     public User() {
 

@@ -4,10 +4,8 @@ import com.paymybuddy.dto.ContactDto;
 import com.paymybuddy.dto.CreditDto;
 import com.paymybuddy.dto.TransactionDto;
 import com.paymybuddy.mapper.TransactionMapper;
-import com.paymybuddy.model.Account;
 import com.paymybuddy.model.Transaction;
 import com.paymybuddy.model.User;
-import com.paymybuddy.service.AccountService;
 import com.paymybuddy.service.ContactService;
 import com.paymybuddy.service.TransactionService;
 import com.paymybuddy.service.UserService;
@@ -33,8 +31,7 @@ public class TransactionController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private AccountService accountService;
+
     @Autowired
     private TransactionMapper transactionMapper;
     @Autowired
@@ -70,14 +67,6 @@ public class TransactionController {
         User user = userService.findUser();
         model.addAttribute("emitter1", user);
 
-        // List of accounts
-        List<Account> accounts = accountService.listOfAccounts(user);
-        model.addAttribute("accounts", accounts);
-
-        // List of user accounts
-        List<Account> userAccounts = accountService.listOfUserAccounts();
-        model.addAttribute("useraccounts", userAccounts);
-
         //recuperation liste des contacts
         List<ContactDto> contacts = contactService.listOfContacts(user);
         model.addAttribute("contacts", contacts);
@@ -91,14 +80,6 @@ public class TransactionController {
         model.addAttribute("userSold", userSold);
 
 
-        //Pagination
-        /*Page<Transaction> page1 = transactionService.pagination(user, pageNo, pageSize);
-        List<Transaction> listTransactions = page1.getContent();
-        model.addAttribute("currentPage", pageNo);
-        model.addAttribute("totalPages", page1.getTotalPages());
-        model.addAttribute("totalItems", page1.getTotalElements());
-        model.addAttribute("transactions", listTransactions);
-        model.addAttribute("transaction", new TransactionDto());*/
         List<Transaction> listTransactions = new ArrayList<>();
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", 0);

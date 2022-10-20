@@ -1,17 +1,13 @@
 package com.paymybuddy.service.impl;
 
-
 import com.paymybuddy.model.Bank;
 import com.paymybuddy.model.Transaction;
 import com.paymybuddy.model.User;
-import com.paymybuddy.repository.AccountRepository;
 import com.paymybuddy.repository.BankRepository;
 import com.paymybuddy.repository.TransactionRepository;
 import com.paymybuddy.repository.UserRepository;
 import com.paymybuddy.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -21,18 +17,12 @@ import java.math.RoundingMode;
 import java.util.List;
 
 
-
-
-
 @Service
 @Transactional
 public class TransactionServiceImpl implements TransactionService {
 
     @Autowired
     public TransactionRepository transactionRepository;
-
-    @Autowired
-    public AccountRepository accountRepository;
 
     @Autowired
     public UserRepository userRepository;
@@ -66,12 +56,6 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public List<Transaction> findByEmitter(User user) {
         return transactionRepository.findByEmitter(user);
-    }
-
-
-    @Override
-    public Page<Transaction> pagination(User user, int pageNo, int pageSize) {
-        return transactionRepository.findByEmitter(user, PageRequest.of(pageNo, pageSize));
     }
 
    @Override

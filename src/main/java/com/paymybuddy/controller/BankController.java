@@ -2,7 +2,6 @@ package com.paymybuddy.controller;
 
 import com.paymybuddy.dto.BankDto;
 import com.paymybuddy.mapper.BankMapper;
-import com.paymybuddy.model.Account;
 import com.paymybuddy.model.Bank;
 import com.paymybuddy.service.BankService;
 import org.springframework.beans.factory.annotation.Autowired;

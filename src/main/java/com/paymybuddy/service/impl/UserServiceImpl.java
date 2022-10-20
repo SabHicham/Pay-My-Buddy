@@ -4,12 +4,11 @@ package com.paymybuddy.service.impl;
 import com.paymybuddy.dto.UserDto;
 import com.paymybuddy.mapper.UserMapper;
 import com.paymybuddy.model.User;
-import com.paymybuddy.repository.AccountRepository;
 import com.paymybuddy.repository.BankRepository;
-import com.paymybuddy.repository.ContactRepository;
 import com.paymybuddy.repository.UserRepository;
 import com.paymybuddy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -31,16 +30,15 @@ public class UserServiceImpl implements UserService {
 
 
     @Autowired
-    public AccountRepository accountRepository;
-
-    @Autowired
     public BCryptPasswordEncoder passwordEncoder;
     @Autowired
     public UserMapper userMapper;
 
+    public SecurityContext context = SecurityContextHolder.getContext();
+
     @Override
     public User findUser() {
-        String userMail = SecurityContextHolder.getContext().getAuthentication().getName();
+        String userMail = context.getAuthentication().getName();
         return userRepository.findByEmail(userMail);
     }
 

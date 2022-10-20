@@ -16,5 +16,5 @@ public interface TransactionService {
 
     List<Transaction> findByEmitter(User user);
 
-    Page<Transaction> pagination(User user, int pageNo, int pageSize);
+
 }

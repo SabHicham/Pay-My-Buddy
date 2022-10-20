@@ -3,7 +3,6 @@ package com.paymybuddy.service.impl;
 
 import com.paymybuddy.model.Bank;
 import com.paymybuddy.repository.BankRepository;
-import com.paymybuddy.service.impl.BankServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

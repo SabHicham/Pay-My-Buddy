@@ -4,7 +4,6 @@ import com.paymybuddy.dto.UserDto;
 import com.paymybuddy.model.User;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class UserMapper implements Mapper<User, UserDto>{
