@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/styleTransaction.css}"/>
+    <!--codePen button-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <title>home</title>
+</head>
+<body>
+<div class="topnav">
+    <b class="active" href="#home">Pay My Buddy</b>
+    <a class="active" href="/login?logout">Déconnexion</a>
+    <a href="/contact">Amis</a>
+    <a href="/profile">Profil</a>
+    <a href="/transaction">Transfert</a>
+    <a href="/home">Accueil</a>
+</div>
+
+<button class="custom-btn btn-13">MON SOLDE: <span th:text ="${userSold}"></span></button>
+
+
+
+
+
+<div style="height:150px;"></div>
+<div class="offset-md-3">
+    <img th:src="@{/img/LogoPayMyBuddy.png}" alt="" class="image_responsive" width="360" height="200">
+</div>
+</body>
+</html>

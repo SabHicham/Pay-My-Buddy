@@ -1,0 +1,89 @@
+package com.paymybuddy.service.impl;
+
+
+import com.paymybuddy.dto.UserDto;
+import com.paymybuddy.mapper.UserMapper;
+import com.paymybuddy.model.User;
+import com.paymybuddy.repository.BankRepository;
+import com.paymybuddy.repository.UserRepository;
+import com.paymybuddy.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+
+
+@Service
+@Transactional
+public class UserServiceImpl implements UserService {
+    @Autowired
+    public UserRepository userRepository;
+
+    @Autowired
+    public BankRepository bankRepository;
+
+
+    @Autowired
+    public BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    public UserMapper userMapper;
+
+    public SecurityContext context;
+
+    public SecurityContext getAuthenticationContext(){
+        if (context == null){
+            context = SecurityContextHolder.getContext();
+        }
+        return context;
+    }
+
+    @Override
+    public User findUser() {
+        String userMail = getAuthenticationContext().getAuthentication().getName();
+        return userRepository.findByEmail(userMail);
+    }
+
+    @Override
+    public User createUser(User user) {
+        User userEmail = userRepository.findByEmail(user.getEmail());
+        if (userEmail == null) {
+            return userRepository.save(user);
+        } else {
+            userEmail.setEmail(user.getEmail());
+            return userRepository.save(userEmail);
+        }
+    }
+
+
+
+
+
+
+
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            throw new UsernameNotFoundException("Invalid username or password.");
+        }
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), new ArrayList<>());
+    }
+
+    @Override
+    public User save(UserDto registrationDto) {
+        User user = userMapper.toEntity(registrationDto);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
+    }
+
+
+}

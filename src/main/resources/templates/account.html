@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <title>home</title>
+</head>
+<body>
+
+<div class="container">
+    <form class="offset-md-3" th:action="@{/account}" method="post" th:object="${account}">
+
+        <div class="row">
+            <div class="col-auto pt-5 pl-3">
+                <label class="control-label"> Bank </label>
+            </div>
+
+            <select hidden th:field="*{user.id}">
+                <option th:each="emitter : ${emitter}"
+                        th:value="${emitter.id}"
+                        th:text="${emitter.email}"></option>
+            </select>
+
+
+            <div class="col-6 pt-5 ">
+                <select class="form-control" th:field="*{bank.id}">
+                    <option th:each="bank : ${banks}"
+                            th:value="${bank.getId()}"
+                            th:text="${bank.name}"></option>
+                </select>
+            </div>
+
+            <div class="pl-4 pt-5">
+                <a href="bankregistration">Saisir une nouvelle banque</a>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-1 pt-5">
+                <label class="control-label"> Iban </label>
+            </div>
+            <div class="col-6 pt-5">
+                <input
+                        id="iban" class="form-control" name="iban"
+                        required
+                        autofocus="autofocus"
+                />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 pt-5">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success offset-md-10">Register</button>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+</body>
+</html>

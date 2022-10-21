@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/styleTransaction.css}"/>
+    <!--codePen button-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <title>transaction</title>
+</head>
+<body>
+<!--topnav codePen-->
+<div class="topnav">
+    <b class="active" href="#home">Pay My Buddy</b>
+    <a class="active" href="/login?logout">Déconnexion</a>
+    <a href="/contact">Amis</a>
+    <a href="/profile">Profil</a>
+    <a href="/transaction">Transfert</a>
+    <a href="/home">Accueil</a>
+</div>
+<br>
+<!--ajout d'argent paymybuddy-->
+<div class="containerT"><h2>Ajouter argent sur PayMyBuddy</h2></div>
+<ul class="responsive-table">
+    <form th:action="@{/transaction/crediter}" method="post" th:object="${credit}">
+    <li class="table-row">
+
+            <div class="col col-3" data-label=""><label for="amount1">montant a crediter</label>
+                <input type="number" id="amount1" name="amount"
+                       min="1" max="100000"></div>
+        <div class="col col-4" data-label=""> <input type="submit" class="btn btn-success offset-md-10" value="Envoyer"></div>
+
+        </li>
+        </form>
+</ul>
+<!--ajout d'argent a ma banque-->
+<div class="containerT"><h2>Ajouter argent sur ma banque</h2></div>
+<ul class="responsive-table">
+    <form th:action="@{/transaction/debiter}" method="post" th:object="${debit}">
+        <li class="table-row">
+
+            <div class="col col-3" data-label=""><label for="amount2">montant à debiter</label>
+                <input type="number" id="amount2" name="amount"
+                       min="1" max="100000"></div>
+            <div class="col col-4" data-label=""> <input type="submit" class="btn btn-success offset-md-10" value="Envoyer"></div>
+
+        </li>
+    </form>
+</ul>
+
+<button class="custom-btn btn-13">MON SOLDE: <span th:text ="${userSold}"></span></button>
+<!--Envoi d'argent-->
+<div class="containerT"><h2>Envoi d'argent</h2></div>
+
+<ul class="responsive-table">
+
+        <form th:action="@{/transaction}" method="post" th:object="${transaction}">
+            <li class="table-row">
+        <div class="col col-2" data-label=""><label for="contact">Amis</label>
+            <input hidden th:value="${emitter1.email}" name="emitterEmail"/>
+            <input list="amis" id="contact" name="receiverEmail"/>
+
+            <datalist  id="amis">
+                <select>
+                    <option th:each="contact:${contacts}"th:value="${contact.email}" th:text="${contact.firstName+' '+contact.lastName}">
+                    </option>
+                </select>
+            </datalist></div>
+        <div class="col col-3" data-label=""><label for="amount">Montant à Envoyer&emsp;&emsp;</label>
+            <input type="number" id="amount" name="amount"
+                   min="1" max="100000"></div>
+        <div class="col col-3" data-label=""><label for="description">Description&emsp;&emsp;&emsp;&emsp;&emsp;</label>
+            <input type="text" id="description" name="description"></div>
+        <div class="col col-4" data-label=""><div class=""> <input type="submit" class="btn btn-success offset-md-10" value="Envoyer"></div></div>
+        </form>
+    </li>
+</ul>
+
+
+<!--Mes transaction-->
+<div class="containerT"><h2>Mes Transactions</h2></div>
+
+<div class="container">
+
+    <ul class="responsive-table">
+        <li class="table-header">
+
+            <div class="col col-2">AMIS</div>
+            <div class="col col-3">SOMME</div>
+            <div class="col col-4">Description</div>
+        </li>
+
+
+        <li class="table-row" th:each="transaction:${transactions}">
+
+           <div class="col col-2" data-label="Amis" th:text="${transaction.receiver.firstName}"></div>
+            <div class="col col-3" data-label="Somme" th:text="${transaction.amount}"></div>
+            <div class="col col-4" data-label="Description" th:text="${transaction.description}"></div>
+        </li>
+
+
+    </ul>
+</div>
+</body>
+</html>
