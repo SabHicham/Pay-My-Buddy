@@ -12,6 +12,8 @@ public interface TransactionService {
 
     void transfetMoneyFromBank(int amount);
 
+    void transfetMoneyToBank(int amount);
+
     List<Transaction> findByEmitter(User user);
 
 

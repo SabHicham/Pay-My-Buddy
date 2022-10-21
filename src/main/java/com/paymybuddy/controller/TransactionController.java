@@ -49,6 +49,12 @@ public class TransactionController {
         transactionService.transfetMoneyFromBank(creditDto.getAmount());
         return "redirect:/transaction";
     }
+    @PostMapping(value = "/debiter")
+    public String debiterUserAcount(@ModelAttribute("debit") CreditDto creditDto) throws Exception {
+        //create
+        transactionService.transfetMoneyToBank(creditDto.getAmount());
+        return "redirect:/transaction";
+    }
     @GetMapping
     public String showTransferForm(HttpServletRequest request, Model model) {
         int pageSize = 5;

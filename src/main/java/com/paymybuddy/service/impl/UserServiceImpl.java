@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 
@@ -34,11 +35,18 @@ public class UserServiceImpl implements UserService {
     @Autowired
     public UserMapper userMapper;
 
-    public SecurityContext context = SecurityContextHolder.getContext();
+    public SecurityContext context;
+
+    public SecurityContext getAuthenticationContext(){
+        if (context == null){
+            context = SecurityContextHolder.getContext();
+        }
+        return context;
+    }
 
     @Override
     public User findUser() {
-        String userMail = context.getAuthentication().getName();
+        String userMail = getAuthenticationContext().getAuthentication().getName();
         return userRepository.findByEmail(userMail);
     }
 

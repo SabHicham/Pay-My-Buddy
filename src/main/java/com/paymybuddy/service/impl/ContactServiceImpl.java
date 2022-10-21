@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
@@ -32,8 +33,14 @@ public class ContactServiceImpl implements ContactService {
     @Autowired
     private UserRepository userRepository;
 
-    public SecurityContext context = SecurityContextHolder.getContext();
+    public SecurityContext context;
 
+    public SecurityContext getAuthenticationContext(){
+        if (context == null){
+            context = SecurityContextHolder.getContext();
+        }
+        return context;
+    }
     @Override
     public List<ContactDto> listOfContacts(User user) {
         List<Contact> contacts = contactRepository.findByuserId(user.getId());
@@ -55,7 +62,7 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public void saveFriend(ContactDto contactDto) {
-        User userConnected = userRepository.findByEmail(context.getAuthentication().getName());
+        User userConnected = userRepository.findByEmail(getAuthenticationContext().getAuthentication().getName());
         User userToSave = userRepository.findByEmail(contactDto.getEmail());
         //check if userDto exist
         //check if userDto already friend

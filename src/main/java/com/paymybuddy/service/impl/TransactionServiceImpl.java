@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
 import java.util.List;
@@ -25,7 +27,14 @@ public class TransactionServiceImpl implements TransactionService {
     @Autowired
     public UserRepository userRepository;
 
-    public SecurityContext context = SecurityContextHolder.getContext();
+    public SecurityContext context;
+
+    public SecurityContext getAuthenticationContext(){
+        if (context == null){
+            context = SecurityContextHolder.getContext();
+        }
+        return context;
+    }
 
 
 
@@ -62,11 +71,21 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public void transfetMoneyFromBank(int amount) {
-        User userConnected = userRepository.findByEmail(context.getAuthentication().getName());
+        User userConnected = userRepository.findByEmail(getAuthenticationContext().getAuthentication().getName());
         if (amount > 0){
             userConnected.setSold(userConnected.getSold()+amount);
             userRepository.save(userConnected);
         }
+    }
+
+    @Override
+    public void transfetMoneyToBank(int amount) {
+        User userConnected = userRepository.findByEmail(getAuthenticationContext().getAuthentication().getName());
+        if (amount > 0 && amount <= userConnected.getSold()){
+            userConnected.setSold(userConnected.getSold()-amount);
+            userRepository.save(userConnected);
+        }
+
     }
 
 }
