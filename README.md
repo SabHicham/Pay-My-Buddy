@@ -14,6 +14,11 @@ installez Maven
 installez MySql et MySqlWorkBench
 <h2>Importez le script</h2>
 Après avoir fait toutes les installations, importez le script MySql suivant:
+https://github.com/SabHicham/Pay-My-Buddy/blob/develop/ScriptSqlPayMyBuddy.sql
 
-
+<h2>Sécurité</h2>
+pour sécuriser vos données dans application.properties lancez la commande:
+mvn spring-boot:run -Dspring-boot.run.arguments="--spring.datasource.username=root --spring.datasource.password=root"
+</br>
+Ou bien, les enregistrer dans des profils Maven dans le fichier settings.xml, afin d’y accéder depuis le code.
 
