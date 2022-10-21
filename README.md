@@ -2,7 +2,7 @@
 Pay My Buddy, une start-up technologique qui fournit des solutions bancaires et financières.
 Une appli qui permettrait aux clients de transférer de l'argent pour gérer leurs finances ou payer leurs amis.
 <h1>Diagramme UML</h1>
-![Exemple de diagramme de classes]()
+![Exemple de diagramme de classes](digramme de classe UML PayMyBuddy.png)
 <h1>Modèle physique de donnés</h1>
 ![alt text](https://github.com/SabHicham/Pay-My-Buddy/blob/develop/model%20physique%20de%20données%20PayMyBuddy.png)
 <h1>installation</h1>
