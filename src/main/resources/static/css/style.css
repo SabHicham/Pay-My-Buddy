@@ -4,14 +4,18 @@
 img {
   width: 360px;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+
+
+
 }
+.imgTop {
+    margin-left: 300px;
+}
+
 
 .login-page {
   width: 360px;
-  padding: 8% 0 0;
-  margin: auto;
+
 }
 .form {
   position: relative;
@@ -38,7 +42,7 @@ img {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #4CAF50;
+  background: #5bb95a;
   width: 100%;
   border: 0;
   padding: 15px;
@@ -127,18 +131,19 @@ body {
 }
 
 /* Change the color of links on hover */
+/*couleur vert de la maquette*/
 .topnav a:hover {
-  background-color: #ddd;
+  background-color: #5bb95a;
   color: black;
 }
 
 /* Add a color to the active/current link */
 .topnav a.active {
-  background-color: #04AA6D;
+  background-color: #5bb95a;
   color: white;
 }
 .topnav b.active {
-  background-color: #04AA6D;
+  background-color: #5bb95a;
   color: white;
 }
 

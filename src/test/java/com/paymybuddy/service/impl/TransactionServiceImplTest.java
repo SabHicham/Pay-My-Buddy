@@ -38,10 +38,6 @@ public class TransactionServiceImplTest {
     @Mock
     private Authentication authentication;
 
-    @BeforeEach
-    private void setUp() {
-        transactionService.context=context;
-    }
 
 
     @Test
@@ -192,7 +188,7 @@ public class TransactionServiceImplTest {
         when(userRepository.findByEmail(any())).thenReturn(user);
 
         //when
-        transactionService.transfetMoneyFromBank(10);
+        transactionService.transfetMoneyFromBank(10, context);
         //then
 
     }
@@ -207,7 +203,7 @@ public class TransactionServiceImplTest {
         when(userRepository.findByEmail(any())).thenReturn(user);
 
         //when
-        transactionService.transfetMoneyFromBank(-1);
+        transactionService.transfetMoneyFromBank(-1, context);
         //then
 
     }

@@ -33,14 +33,7 @@ public class ContactServiceImpl implements ContactService {
     @Autowired
     private UserRepository userRepository;
 
-    public SecurityContext context;
 
-    public SecurityContext getAuthenticationContext(){
-        if (context == null){
-            context = SecurityContextHolder.getContext();
-        }
-        return context;
-    }
     @Override
     public List<ContactDto> listOfContacts(User user) {
         List<Contact> contacts = contactRepository.findByuserId(user.getId());
@@ -62,16 +55,24 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public void saveFriend(ContactDto contactDto) {
-        User userConnected = userRepository.findByEmail(getAuthenticationContext().getAuthentication().getName());
+        saveFriend(contactDto, SecurityContextHolder.getContext());
+
+    }
+    @Override
+    public void saveFriend(ContactDto contactDto, SecurityContext securityContext) {
+        User userConnected = userRepository.findByEmail(securityContext.getAuthentication().getName());
         User userToSave = userRepository.findByEmail(contactDto.getEmail());
         //check if userDto exist
         //check if userDto already friend
-        if (Objects.nonNull(userToSave)) {
+        if (Objects.nonNull(userToSave) && userConnected.getEmail()!=userToSave.getEmail()) {
             Contact contact = new Contact();
             contact.setUser(userConnected);
             contact.setFriend(userToSave);
             contactRepository.save(contact);
 
+        }
+        else {
+            throw new IllegalArgumentException();
         }
 
 

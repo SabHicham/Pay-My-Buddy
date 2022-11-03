@@ -38,6 +38,13 @@
                 <div class="alert alert-info">You've successfully registered a connection!</div>
             </div>
 
+            <!-- error contact -->
+            <div th:if="${param.error}">
+                <div class="alert alert-danger">Invalid contact.</div>
+            </div>
+
+
+
             <h2>Ajouter un amis</h2>
 
         <form th:action="@{/contact}" method="post" th:object="${contact}">

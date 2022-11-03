@@ -1,53 +1,73 @@
 body {
-  font-family: "lato", sans-serif;
+	 font-family: 'lato', sans-serif;
 }
+ .main {
+	 max-width: 1100px;
+	 margin: auto;
+}
+ .container {
+	 max-width: 1000px;
+	 margin-left: auto;
+	 margin-right: auto;
+}
+ h2 {
+	 font-size: 26px;
+	 margin: 20px 0;
+}
+ h2 small {
+	 font-size: 0.5em;
+}
+ .button-send-money {
+	 background: #5cb95b;
+	 color: #fff;
+	 text-decoration: none;
+	/* normal */
+	 padding: 10px 40px;
+	 border-radius: 5px;
+}
+ .transactions-table {
+	 border: 3px solid #555;
+	 padding-left: 0px;
+}
+ .responsive-table {
+	 text-align: center;
+}
+ .responsive-table li {
+	 border-radius: 3px;
+	 padding: 25px 30px;
+	 display: flex;
+	 justify-content: space-between;
+	 margin-bottom: 25px;
+	 padding-left: -20px;
+}
+ .responsive-table .table-header {
+	 background-color: #5cb95b;
+	 color: #fff;
+	 font-size: 14px;
+	 text-transform: uppercase;
+	 letter-spacing: 0.03em;
+}
+ .responsive-table .table-row {
+	 background-color: #fff;
+	 box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+}
+ .responsive-table .col-1 {
+	 flex-basis: 25%;
+}
+ .responsive-table .col-2 {
+	 flex-basis: 25%;
+   margin-top: 30px;
+   margin-left: 70px;
 
-.container {
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 10px;
-  padding-right: 10px;
 }
+ .responsive-table .col-3 {
+	 flex-basis: 25%;
+   margin-top: 0px;
 
-h2 {
-  font-size: 26px;
-  margin: 20px 0;
-  text-align: center;
 }
-h2 small {
-  font-size: 0.5em;
-}
-
-.responsive-table li {
-  border-radius: 3px;
-  padding: 25px 30px;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 25px;
-}
-.responsive-table .table-header {
-  background-color: #04AA6D;
-  color: #fff;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
-.responsive-table .table-row {
-  background-color: #ffffff;
-  box-shadow: 5px 5px 9px 2px rgba(0, 0, 0, 0.1);
-}
-.responsive-table .col-1 {
-  flex-basis: 15%;
-}
-.responsive-table .col-2 {
-  flex-basis: 35%;
-}
-.responsive-table .col-3 {
-  flex-basis: 20%;
-}
-.responsive-table .col-4 {
-  flex-basis: 30%;
+ .responsive-table .col-4 {
+	 flex-basis: 25%;
+	 margin-top: 10px;
 }
 @media all and (max-width: 767px) {
   .responsive-table .table-header {
@@ -80,7 +100,7 @@ h2 small {
   font-size: 17px;
 }
 .topnav a.active {
-  background-color: #04AA6D;
+  background-color: #5bb95a;
   color: white;
 }
 /*codePen button sold */
@@ -105,8 +125,8 @@ h2 small {
 }
 /* 13 */
 .btn-13 {
-  background-color: #89d8d3;
-background-image: linear-gradient(315deg, #89d8d3 0%, #04AA6D 74%);
+  background-color: #5bb95a;
+
   border: none;
   z-index: 1;
 }
@@ -142,15 +162,12 @@ background-image: linear-gradient(315deg, #04AA6D 26%, #96e4df 74%);
 /*header h2*/
 .containerT{
   display: flex;
-  color: #fff;
+
 }
 h2 {
-  color: #fff;
-  border: 1px solid #04AA6D;
-  border-radius: 5px;
   -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
   font-weight: normal;
-  background: #04AA6D;
+
   margin: auto;
 }

@@ -31,8 +31,13 @@ public class ContactController {
     @PostMapping
     public String registerContact(@ModelAttribute("contact") ContactDto contactDto) {
         //create
-        contactService.saveFriend(contactDto);
-        return "redirect:/transaction";
+        try {
+            contactService.saveFriend(contactDto);
+            return "redirect:/transaction";
+        }
+        catch (IllegalArgumentException e){
+            return "redirect:/contact?error";
+        }
     }
     @ModelAttribute("contact")
     public ContactDto contactDto() {

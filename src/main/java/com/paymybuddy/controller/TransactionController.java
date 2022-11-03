@@ -40,20 +40,24 @@ public class TransactionController {
     @PostMapping
     public String registerUserAccount(@ModelAttribute("transaction") TransactionDto transactionDto) throws Exception {
         //create
-        transactionService.createTransaction(transactionMapper.toEntity(transactionDto));
+
+        Transaction transaction = transactionService.createTransaction(transactionMapper.toEntity(transactionDto));
+        if (transaction==null){
+            return "redirect:/transaction?error";
+        }
         return "redirect:/transaction";
     }
     @PostMapping(value = "/crediter")
     public String crediterUserAcount(@ModelAttribute("credit") CreditDto creditDto) throws Exception {
         //create
         transactionService.transfetMoneyFromBank(creditDto.getAmount());
-        return "redirect:/transaction";
+        return "redirect:/home";
     }
     @PostMapping(value = "/debiter")
     public String debiterUserAcount(@ModelAttribute("debit") CreditDto creditDto) throws Exception {
         //create
         transactionService.transfetMoneyToBank(creditDto.getAmount());
-        return "redirect:/transaction";
+        return "redirect:/home";
     }
     @GetMapping
     public String showTransferForm(HttpServletRequest request, Model model) {

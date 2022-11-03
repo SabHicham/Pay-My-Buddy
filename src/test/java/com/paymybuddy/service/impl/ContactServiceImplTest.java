@@ -46,12 +46,6 @@ public class ContactServiceImplTest {
     @Mock
     private Authentication authentication;
 
-    @BeforeEach
-    private void setUp() {
-        contactService.context=context;
-    }
-
-
 
     @Test()
     public void shouldThrowExceptionWhenUserIsInDatabase() throws Exception {
@@ -123,7 +117,7 @@ public class ContactServiceImplTest {
 
 
         //when
-        contactService.saveFriend(new ContactDto());
+        contactService.saveFriend(new ContactDto(), context);
 
         //then
 

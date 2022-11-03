@@ -35,18 +35,16 @@ public class UserServiceImpl implements UserService {
     @Autowired
     public UserMapper userMapper;
 
-    public SecurityContext context;
 
-    public SecurityContext getAuthenticationContext(){
-        if (context == null){
-            context = SecurityContextHolder.getContext();
-        }
-        return context;
-    }
 
     @Override
     public User findUser() {
-        String userMail = getAuthenticationContext().getAuthentication().getName();
+        return findUser(SecurityContextHolder.getContext());
+    }
+
+    @Override
+    public User findUser(SecurityContext securityContext) {
+        String userMail = securityContext.getAuthentication().getName();
         return userRepository.findByEmail(userMail);
     }
 

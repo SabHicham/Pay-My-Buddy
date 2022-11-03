@@ -41,10 +41,6 @@ public class UserServiceImplTest {
     @Mock
     private Authentication authentication;
 
-    @BeforeEach
-    private void setUp() {
-        userService.context=context;
-    }
 
 
     @Test
@@ -80,7 +76,7 @@ public class UserServiceImplTest {
         when(userRepository.findByEmail(any())).thenReturn(new User());
 
         //when
-        User findUser = userService.findUser();
+        User findUser = userService.findUser(context);
         //then
         assertNotNull(findUser);
     }

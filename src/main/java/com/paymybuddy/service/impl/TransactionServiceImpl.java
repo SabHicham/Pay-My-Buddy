@@ -27,14 +27,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Autowired
     public UserRepository userRepository;
 
-    public SecurityContext context;
 
-    public SecurityContext getAuthenticationContext(){
-        if (context == null){
-            context = SecurityContextHolder.getContext();
-        }
-        return context;
-    }
 
 
 
@@ -71,7 +64,12 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public void transfetMoneyFromBank(int amount) {
-        User userConnected = userRepository.findByEmail(getAuthenticationContext().getAuthentication().getName());
+        transfetMoneyFromBank(amount, SecurityContextHolder.getContext());
+    }
+
+    @Override
+    public void transfetMoneyFromBank(int amount, SecurityContext securityContext) {
+        User userConnected = userRepository.findByEmail(securityContext.getAuthentication().getName());
         if (amount > 0){
             userConnected.setSold(userConnected.getSold()+amount);
             userRepository.save(userConnected);
@@ -80,7 +78,12 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public void transfetMoneyToBank(int amount) {
-        User userConnected = userRepository.findByEmail(getAuthenticationContext().getAuthentication().getName());
+        transfetMoneyToBank(amount, SecurityContextHolder.getContext());
+
+    }
+    @Override
+    public void transfetMoneyToBank(int amount, SecurityContext securityContext) {
+        User userConnected = userRepository.findByEmail(securityContext.getAuthentication().getName());
         if (amount > 0 && amount <= userConnected.getSold()){
             userConnected.setSold(userConnected.getSold()-amount);
             userRepository.save(userConnected);
