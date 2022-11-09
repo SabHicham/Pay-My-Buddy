@@ -1,7 +1,5 @@
 package com.paymybuddy.mapper;
 
-import com.paymybuddy.dto.BankDto;
-import com.paymybuddy.model.Bank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

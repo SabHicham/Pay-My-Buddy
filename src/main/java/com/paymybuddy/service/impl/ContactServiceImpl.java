@@ -34,11 +34,6 @@ public class ContactServiceImpl implements ContactService {
     private UserRepository userRepository;
 
 
-    @Override
-    public List<ContactDto> listOfContacts(User user) {
-        List<Contact> contacts = contactRepository.findByuserId(user.getId());
-        return contacts.stream().map(contactMapper::toDTO).collect(Collectors.toList());
-    }
 
     @Override
     public Contact createContact(Contact contact) throws Exception {

@@ -55,8 +55,8 @@ public class ContactController {
         model.addAttribute("emitter", user);
 
         //recuperation liste des contacts
-        List<ContactDto> contacts = contactService.listOfContacts(user);
-        model.addAttribute("contacts", contacts);
+        //List<ContactDto> contacts = contactService.listOfContacts(user);
+        model.addAttribute("contacts", user.getFriends());
 
 
         return "contact";

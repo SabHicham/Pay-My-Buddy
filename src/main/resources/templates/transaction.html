@@ -40,7 +40,7 @@
                     <div class="col col-1" data-label="">
                         <label for="contact">Amis</label>
                         <input hidden th:value="${emitter1.email}" name="emitterEmail"/>
-                        <input list="amis" id="contact" name="receiverEmail" required autofocus="autofocus"/>
+                        <input list="amis" id="contact" name="receiverEmail" required autofocus="autofocus" autocomplete="off"/>
                         <datalist id="amis">
                             <select>
                                 <option th:each="contact:${contacts}"th:value="${contact.email}" th:text="${contact.firstName+' '+contact.lastName}">

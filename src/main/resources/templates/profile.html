@@ -17,6 +17,17 @@
 </div>
 <h1>bienvenue sur votre profil</h1>
 <h2>voila votre solde</h2>
+<button class="custom-btn btn-13">MON SOLDE: <span th:text ="${userSold}"></span></button>
+<h1 class="offset-md-5 pb-3">Listes de mes amis</h1>
+<div class="col col-1" data-label=""><label for="contact">Mes amis</label>
+    <input list="amis" id="contact" name="contact" autocomplete="off"/>
+    <datalist  id="amis">
+        <select>
+            <option th:each="contact:${contacts}" th:value="${contact.firstName+' '+contact.lastName}">
+            </option>
+        </select>
+    </datalist></div>
+<!-- add contact -->
 
 </body>
 </html>

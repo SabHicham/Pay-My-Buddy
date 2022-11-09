@@ -3,7 +3,6 @@ package com.paymybuddy.controller;
 
 
 
-import com.paymybuddy.dto.BankDto;
 import com.paymybuddy.dto.UserDto;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

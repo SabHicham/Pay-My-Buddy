@@ -1,13 +1,10 @@
 package com.paymybuddy.service.impl;
 
 import com.paymybuddy.dto.ContactDto;
-import com.paymybuddy.mapper.ContactMapper;
-import com.paymybuddy.model.Bank;
 import com.paymybuddy.model.Contact;
 import com.paymybuddy.model.User;
 import com.paymybuddy.repository.ContactRepository;
 import com.paymybuddy.repository.UserRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,10 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -38,8 +32,7 @@ public class ContactServiceImplTest {
     @Mock
     private UserRepository userRepository;
 
-    @Mock
-    private ContactMapper contactMapper;
+
     @Mock
     private SecurityContext context;
 
@@ -50,7 +43,7 @@ public class ContactServiceImplTest {
     @Test()
     public void shouldThrowExceptionWhenUserIsInDatabase() throws Exception {
         //given
-        User user = new User(9,"hicham", "jager", "hicham@email.com", "1234", 1000.0);
+        User user = new User(9,"hicham", "jager", "hicham@email.com", "1234", 1000.0, new HashSet<>());
         Bank bank = new Bank(1 , "CIC");
         Contact contact = new Contact(1, any(), any());
 
@@ -63,29 +56,12 @@ public class ContactServiceImplTest {
         }
     }
 
-    @Test
-    public void listOfContactsTest() {
-        //given
-        User user = new User(9,"hicham", "jager", "hicham@email.com", "1234", 1000.0);
-        Bank bank = new Bank(1, "CIC");
-        ContactDto contact = new ContactDto();
-        List<ContactDto> contacts = Collections.singletonList(contact);
-        when(contactRepository.findByuserId(user.getId())).thenReturn(Arrays.asList(new Contact()));
-        when(contactMapper.toDTO(any())).thenReturn(new ContactDto());
-
-        //when
-        List<ContactDto> listofContacts = contactService.listOfContacts(user);
-
-        //then
-        assertEquals(listofContacts, contacts);
-
-    }
 
     @Test
     public void createContactTest() throws Exception {
 
         //given
-        User user = new User(9,"hicham", "jager", null, "1234", 1000.0);
+        User user = new User(9,"hicham", "jager", null, "1234", 1000.0, new HashSet<>());
         Bank bank = new Bank(1 , "CIC");
 
         Contact contact = new Contact();
@@ -106,7 +82,7 @@ public class ContactServiceImplTest {
     public void saveFriendTest() throws Exception {
 
         //given
-        User user = new User(9,"hicham", "jager", null, "1234", 1000.0);
+        User user = new User(9,"hicham", "jager", null, "1234", 1000.0, new HashSet<>());
         Bank bank = new Bank(1 , "CIC");
 
         Contact contact = new Contact();

@@ -11,7 +11,6 @@ import java.util.List;
 public interface ContactService {
     Contact createContact(Contact contact) throws Exception;
 
-    List<ContactDto> listOfContacts(User user);
 
     void saveFriend(ContactDto contactDto);
 

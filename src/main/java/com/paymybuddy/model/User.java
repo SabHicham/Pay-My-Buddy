@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 
 @AllArgsConstructor
@@ -33,6 +34,14 @@ public class User {
     private Double sold;
 
 
+    @ManyToMany
+    @JoinTable(name = "contact", joinColumns =
+    @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "friend_id"))
+            private Set<User> friends;
+
+    @ManyToOne()
+    @JoinColumn(name = "bank_id", referencedColumnName = "id")
+    private Bank bank;
 
 
     public User() {

@@ -38,7 +38,7 @@ public class TransactionServiceImpl implements TransactionService {
         User receiver = userRepository.findByEmail(transaction.getReceiverEmail());
         transaction.setEmitter(user);
         transaction.setReceiver(receiver);
-        if (receiver.getEmail() != user.getEmail()) {
+        if (user != null && receiver != null && receiver.getEmail() != user.getEmail()) {
             // if receiver=sender then update sold
             if (user.getSold() >= transaction.getAmount()) {
                 user.setSold(user.getSold() - transaction.getAmount());

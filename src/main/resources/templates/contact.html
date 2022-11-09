@@ -21,7 +21,7 @@
 </div>
 <h1 class="offset-md-5 pb-3">Listes de mes amis</h1>
 <div class="col col-1" data-label=""><label for="contact">Mes amis</label>
-    <input list="amis" id="contact" name="contact"/>
+    <input list="amis" id="contact" name="contact" autocomplete="off"/>
     <datalist  id="amis">
         <select>
             <option th:each="contact:${contacts}" th:value="${contact.firstName+' '+contact.lastName}">
