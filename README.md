@@ -3,10 +3,10 @@ Pay My Buddy, une start-up technologique qui fournit des solutions bancaires et 
 Une appli qui permettrait aux clients de transférer de l'argent pour gérer leurs finances ou payer leurs amis.
 
 <h1>Diagramme UML</h1>
-<img width="901" alt="uml_p6" src="https://github.com/SabHicham/Pay-My-Buddy/blob/c7d2be57946d8b7e028aa4f09b79778e44f9fd9c/digramme%20de%20classe%20UML%20PayMyBuddy.png">
+<img width="901" alt="uml_p6" src="https://github.com/SabHicham/Pay-My-Buddy/blob/develop/digramme%20de%20classe%20UML%20PayMyBuddy.png">
 
 <h1>Modèle physique de donnés</h1>
-<img width="901" alt="uml_p6" src="https://github.com/SabHicham/Pay-My-Buddy/blob/37be456859c371fe1b3f5bf7e18301d5d887ac4d/model%20physique%20de%20donne%CC%81es%20PayMyBuddy.png">
+<img width="800" alt="mpd_p6"  src="https://github.com/SabHicham/Pay-My-Buddy/blob/develop/model%20physique%20de%20données%20PayMyBuddy.png">
 
 <h1>installation</h1>
 <h2>lancer le projet</h2>
