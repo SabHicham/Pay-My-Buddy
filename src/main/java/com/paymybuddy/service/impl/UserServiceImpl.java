@@ -54,9 +54,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateIbanUser(String iban) {
+    @Transactional
+    public int updateIbanUser(String iban) {
         String userMail = SecurityContextHolder.getContext().getAuthentication().getName();
-        return userRepository.updateIbanByEmail(iban, findUser().getEmail());
+        return userRepository.updateIbanByEmail(iban, userMail);
     }
 
 

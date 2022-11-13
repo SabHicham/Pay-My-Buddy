@@ -1,5 +1,6 @@
 package com.paymybuddy.controller;
 
+import com.paymybuddy.dto.UserDto;
 import com.paymybuddy.model.User;
 import com.paymybuddy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,9 +28,23 @@ public class MainController {
 
     @GetMapping("/home")
     public String home(HttpServletRequest request, Model model){
-        Double userSold = userService.findUser().getSold();
+        User user = userService.findUser();
+        Double userSold = user.getSold();
         model.addAttribute("userSold", userSold);
+        if (user.getIban() == null || user.getIban().isEmpty()){
+            return "redirect:/registrationIban";
+        }
         return "home" ;
+    }
+
+    @GetMapping("/registrationIban")
+    public String registrationIban(){
+        return "registrationIban";
+    }
+
+    @ModelAttribute("user")
+    public UserDto userDto() {
+        return new UserDto();
     }
 
 

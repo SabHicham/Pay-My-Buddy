@@ -8,7 +8,7 @@
 <body>
 <h2>Pour poursuivre sur Pay My Buddy veuillez renseigner l'iban</h2>
 
-<form th:action="@{/registrationIban}" method="PATCH" th:object="${user}">
+<form th:action="@{/registration/iban}" method="POST" th:object="${user}">
     <div class="form-group">
         <label class="control-label" for="iban"> IBAN </label>
         <input id="iban" class="form-control" th:field="*{iban}"

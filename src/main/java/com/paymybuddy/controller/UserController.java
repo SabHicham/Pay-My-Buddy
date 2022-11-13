@@ -41,12 +41,15 @@ public class UserController {
         }
     }
 
-    @PatchMapping
-    public String updateUserAccount(@ModelAttribute("user") UserDto userDto) {
+    @PostMapping("/iban")
+    public String updateUserIban(@ModelAttribute("user") UserDto userDto) {
         if (userDto.getIban() != null && !userDto.getIban().equals("")) {
             userService.updateIbanUser(userDto.getIban());
             return "redirect:/home";
         }
         return "redirect:/registrationIban";
     }
+
+
+
 }
