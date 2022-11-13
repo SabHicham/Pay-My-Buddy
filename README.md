@@ -6,7 +6,7 @@ Une appli qui permettrait aux clients de transférer de l'argent pour gérer leu
 <img width="901" alt="uml_p6" src="https://github.com/SabHicham/Pay-My-Buddy/blob/develop/digramme%20de%20classe%20UML%20PayMyBuddy.png">
 
 <h1>Modèle physique de donnés</h1>
-<img width="901" alt="uml_p6" src="https://github.com/SabHicham/Pay-My-Buddy/blob/37be456859c371fe1b3f5bf7e18301d5d887ac4d/model%20physique%20de%20donne%CC%81es%20PayMyBuddy.png">
+<img width="901" alt="uml_p6" src="https://github.com/SabHicham/Pay-My-Buddy/blob/develop/model%20physique%20de%20données%20PayMyBuddy.png">
 
 <h1>installation</h1>
 <h2>lancer le projet</h2>
