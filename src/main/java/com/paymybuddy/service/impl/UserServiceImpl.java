@@ -4,7 +4,6 @@ package com.paymybuddy.service.impl;
 import com.paymybuddy.dto.UserDto;
 import com.paymybuddy.mapper.UserMapper;
 import com.paymybuddy.model.User;
-import com.paymybuddy.repository.BankRepository;
 import com.paymybuddy.repository.UserRepository;
 import com.paymybuddy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +23,6 @@ import java.util.ArrayList;
 public class UserServiceImpl implements UserService {
     @Autowired
     public UserRepository userRepository;
-
-    @Autowired
-    public BankRepository bankRepository;
-
 
     @Autowired
     public BCryptPasswordEncoder passwordEncoder;
@@ -58,11 +53,11 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-
-
-
-
-
+    @Override
+    public User updateIbanUser(String iban) {
+        String userMail = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.updateIbanByEmail(iban, findUser().getEmail());
+    }
 
 
     @Override

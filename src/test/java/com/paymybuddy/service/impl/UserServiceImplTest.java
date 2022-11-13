@@ -46,7 +46,7 @@ public class UserServiceImplTest {
     @Test
     public void createUserTest(){
         //given
-        User user = new User(9, "Hicham", "AZZEDDINE", "hicham@email.com", "1234", 10000.0);
+        User user = new User(9, "Hicham", "AZZEDDINE", "hicham@email.com", "1234", 10000.0, null, null);
         when(userRepository.findByEmail(any())).thenReturn(user);
         when(userRepository.save(any())).thenReturn(user);
         //when
@@ -58,7 +58,7 @@ public class UserServiceImplTest {
     @Test
     public void createUserTest2(){
         //given
-        User user = new User(9, "Hicham", "AZZEDDINE", "hicham@email.com", "1234", 10000.0);
+        User user = new User(9, "Hicham", "AZZEDDINE", "hicham@email.com", "1234", 10000.0, null, null);
         when(userRepository.findByEmail(any())).thenReturn(null);
         when(userRepository.save(any())).thenReturn(user);
         //when
@@ -84,7 +84,7 @@ public class UserServiceImplTest {
     @Test
     public void shouldThrowExceptionWhenUserEmailOrPasswordAreInvalid() throws Exception {
         //given
-        User user = new User(9, "Hicham", "AZZEDDINE", "hicham@email.com", "1234", 10000.0);
+        User user = new User(9, "Hicham", "AZZEDDINE", "hicham@email.com", "1234", 10000.0, null, null);
 
         try {
             when(userService.loadUserByUsername(any())).thenThrow(new UsernameNotFoundException("Invalid username or password."));
@@ -137,7 +137,7 @@ public class UserServiceImplTest {
 
         //given
 
-        when(userRepository.findByEmail(any())).thenReturn(new User(1, "a", "a", "a", "a", 10.0));
+        when(userRepository.findByEmail(any())).thenReturn(new User(1, "a", "a", "a", "a", 10.0, null, null));
 
         //when
         userService.loadUserByUsername("a");

@@ -2,9 +2,7 @@ package com.paymybuddy.controller;
 
 import com.paymybuddy.dto.ContactDto;
 import com.paymybuddy.mapper.UserMapper;
-import com.paymybuddy.model.Bank;
 import com.paymybuddy.model.User;
-import com.paymybuddy.service.BankService;
 import com.paymybuddy.service.ContactService;
 import com.paymybuddy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +19,7 @@ import java.util.List;
 public class ContactController {
     @Autowired
     private UserService userService;
-    @Autowired
-    private BankService bankService;
+
     @Autowired
     private UserMapper userMapper;
     @Autowired
@@ -46,9 +43,7 @@ public class ContactController {
 
     @GetMapping
     public String showContactForm(Model model) {
-        List<Bank> banks = bankService.findAll();
-        model.addAttribute("banks", banks);
-        //model.addAttribute("bank", new Bank());
+
 
         // find user for definition of emitter
         User user = userService.findUser();

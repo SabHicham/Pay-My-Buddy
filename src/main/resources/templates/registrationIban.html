@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>registration</title>
+
+</head>
+<body>
+<h2>Pour poursuivre sur Pay My Buddy veuillez renseigner l'iban</h2>
+
+<form th:action="@{/registrationIban}" method="PATCH" th:object="${user}">
+    <div class="form-group">
+        <label class="control-label" for="iban"> IBAN </label>
+        <input id="iban" class="form-control" th:field="*{iban}"
+               required autofocus="autofocus" />
+    </div>
+    <div class="form-group"><input type="submit" value="ENVOYER"></div>
+
+
+
+</form>
+</body>
+</html>

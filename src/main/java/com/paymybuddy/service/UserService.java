@@ -16,5 +16,7 @@ public interface UserService extends UserDetailsService {
 
     User createUser(User user);
 
+    User updateIbanUser(String iban);
+
 
 }

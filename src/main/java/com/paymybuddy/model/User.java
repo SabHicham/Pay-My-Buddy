@@ -33,15 +33,15 @@ public class User {
 
     private Double sold;
 
+    private String iban;
+
 
     @ManyToMany
     @JoinTable(name = "contact", joinColumns =
     @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "friend_id"))
             private Set<User> friends;
 
-    @ManyToOne()
-    @JoinColumn(name = "bank_id", referencedColumnName = "id")
-    private Bank bank;
+
 
 
     public User() {

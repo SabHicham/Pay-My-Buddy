@@ -43,7 +43,7 @@ public class ContactServiceImplTest {
     @Test()
     public void shouldThrowExceptionWhenUserIsInDatabase() throws Exception {
         //given
-        User user = new User(9,"hicham", "jager", "hicham@email.com", "1234", 1000.0, new HashSet<>());
+        User user = new User(9,"hicham", "jager", "hicham@email.com", "1234", 1000.0, null, null);
         Bank bank = new Bank(1 , "CIC");
         Contact contact = new Contact(1, any(), any());
 
@@ -61,7 +61,7 @@ public class ContactServiceImplTest {
     public void createContactTest() throws Exception {
 
         //given
-        User user = new User(9,"hicham", "jager", null, "1234", 1000.0, new HashSet<>());
+        User user = new User(9,"hicham", "jager", null, "1234", 1000.0, null, null);
         Bank bank = new Bank(1 , "CIC");
 
         Contact contact = new Contact();
@@ -82,7 +82,7 @@ public class ContactServiceImplTest {
     public void saveFriendTest() throws Exception {
 
         //given
-        User user = new User(9,"hicham", "jager", null, "1234", 1000.0, new HashSet<>());
+        User user = new User(9,"hicham", "jager", null, "1234", 1000.0, null, null);
         Bank bank = new Bank(1 , "CIC");
 
         Contact contact = new Contact();

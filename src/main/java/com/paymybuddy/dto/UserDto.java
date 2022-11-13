@@ -14,7 +14,7 @@ public class UserDto {
     private String email;
     private String password;
     private double sold;
-    private String bank;
+    private String iban;
     private Set<UserDto> friends;
 
 

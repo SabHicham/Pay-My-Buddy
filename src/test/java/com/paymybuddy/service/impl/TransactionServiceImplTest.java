@@ -40,7 +40,7 @@ public class TransactionServiceImplTest {
     @Test
     public void shouldThrowExceptionWhenNotEnoughMoneyOnAccount() throws Exception {
         //given
-         User user = new User(9,"hicham", "jager", "hicham@email.com", "1234", 1000.0);
+         User user = new User(9,"hicham", "jager", "hicham@email.com", "1234", 1000.0, null, null);
          Bank bank = new Bank(1 , "CIC");
          Transaction transaction = new Transaction(1, "cinema", 100.0, "eren@email.com", "hicham@email.com", any(),any());
 
@@ -57,8 +57,8 @@ public class TransactionServiceImplTest {
     public void testCreateTransaction() throws Exception {
 
         //given
-        User emitter = new User(1, "eren", "jager", "eren@email.com","1234", 350.0);
-        User receiver = new User(1, "eren", "jager", "hicham@email.com","1234", 350.0);
+        User emitter = new User(1, "eren", "jager", "eren@email.com","1234", 350.0, null, null);
+        User receiver = new User(1, "eren", "jager", "hicham@email.com","1234", 350.0, null, null);
         Bank bank = new Bank(0,  "CIC");
 
 
@@ -96,8 +96,8 @@ public class TransactionServiceImplTest {
     public void createTransactionTest() throws Exception {
 
         //given
-        User userEmitter = new User(1, "eren", "jager", "eren@gmail.com", "1234", 1100.0);
-        User userReceiver = new User(2, "mikasa", "ackerman", "mikasa@gmail.com", "1234", 0.1);
+        User userEmitter = new User(1, "eren", "jager", "eren@gmail.com", "1234", 1100.0, null, null);
+        User userReceiver = new User(2, "mikasa", "ackerman", "mikasa@gmail.com", "1234", 0.1, null, null);
         Bank bank = new Bank(1,"CIC");
 
         Transaction transaction = new Transaction();
@@ -132,8 +132,8 @@ public class TransactionServiceImplTest {
     public void testCreateTransactionReturnNull() throws Exception {
 
         //given
-        User emitter = new User(1, "eren", "jager", "eren@email.com","1234", 350.0);
-        User receiver = new User(1, "eren", "jager", "hicham@email.com","1234", 350.0);
+        User emitter = new User(1, "eren", "jager", "eren@email.com","1234", 350.0, null, null);
+        User receiver = new User(1, "eren", "jager", "hicham@email.com","1234", 350.0, null, null);
         Bank bank = new Bank(0,  "CIC");
 
 
@@ -165,7 +165,7 @@ public class TransactionServiceImplTest {
     @Test
     public void findByEmitterTest(){
         //given
-        User user = new User(9,"hicham", "jager", "hicham@email.com", "1234", 1000.0);
+        User user = new User(9,"hicham", "jager", "hicham@email.com", "1234", 1000.0, null, null);
         List<Transaction> transactions = transactionService.findByEmitter(user);
         when(transactionRepository.findByEmitter(any())).thenReturn(transactions);
 
@@ -178,7 +178,7 @@ public class TransactionServiceImplTest {
     @Test
     public void transfetMoneyFromBankTest(){
         //given
-        User user = new User(9,"hicham", "jager", "hicham@email.com", "1234", 1000.0);
+        User user = new User(9,"hicham", "jager", "hicham@email.com", "1234", 1000.0, null, null);
         when(context.getAuthentication()).thenReturn(authentication);
         when(authentication.getName()).thenReturn("");
 
@@ -193,7 +193,7 @@ public class TransactionServiceImplTest {
     @Test
     public void transfetMoneyFromBankTest2(){
         //given
-        User user = new User(9,"hicham", "jager", "hicham@email.com", "1234", 1000.0);
+        User user = new User(9,"hicham", "jager", "hicham@email.com", "1234", 1000.0, null, null);
         when(context.getAuthentication()).thenReturn(authentication);
         when(authentication.getName()).thenReturn("");
 

@@ -4,11 +4,7 @@ import com.paymybuddy.service.UserService;
 import com.paymybuddy.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -36,13 +32,21 @@ public class UserController {
     public String registerUserAccount(@ModelAttribute("user") UserDto registrationDto) {
 
 
-
         try {
             userService.save(registrationDto);
             return "redirect:/registration?success";
-        } catch(Exception e) {
+        } catch (Exception e) {
             return "registration-error";
 
         }
+    }
+
+    @PatchMapping
+    public String updateUserAccount(@ModelAttribute("user") UserDto userDto) {
+        if (userDto.getIban() != null && !userDto.getIban().equals("")) {
+            userService.updateIbanUser(userDto.getIban());
+            return "redirect:/home";
+        }
+        return "redirect:/registrationIban";
     }
 }
