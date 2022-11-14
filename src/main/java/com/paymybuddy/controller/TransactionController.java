@@ -87,7 +87,7 @@ public class TransactionController {
 
         //recuperation du solde;
         Double userSold = userService.findUser().getSold();
-        model.addAttribute("userSold", userSold);
+        model.addAttribute("userSold", String.format("%,.2f",userSold));
 
 
         List<Transaction> listTransactions = new ArrayList<>();

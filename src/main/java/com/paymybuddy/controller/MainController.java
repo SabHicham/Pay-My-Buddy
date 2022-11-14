@@ -30,7 +30,7 @@ public class MainController {
     public String home(HttpServletRequest request, Model model){
         User user = userService.findUser();
         Double userSold = user.getSold();
-        model.addAttribute("userSold", userSold);
+        model.addAttribute("userSold",String.format("%,.2f",userSold));
         if (user.getIban() == null || user.getIban().isEmpty()){
             return "redirect:/registrationIban";
         }
@@ -52,6 +52,9 @@ public class MainController {
     public String profile(HttpServletRequest request, Model model){
         User user = userService.findUser();
         model.addAttribute("contacts", user.getFriends());
+        //recuperation du solde;
+        Double userSold = userService.findUser().getSold();
+        model.addAttribute("userSold", String.format("%,.2f",userSold));
         return "profile" ;
     }
 
