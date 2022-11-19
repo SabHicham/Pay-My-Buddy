@@ -36,7 +36,7 @@ public class ContactControllerTest {
 
         //given
         UserDto userDto = new UserDto(1, "eren", "jager", "eren@email.com", "1234", 100.0, "CIC", new HashSet<>());
-        BankDto bankDto = new BankDto(1, "CIC");
+
 
 
         //then

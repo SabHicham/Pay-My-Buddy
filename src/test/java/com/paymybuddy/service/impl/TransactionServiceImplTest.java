@@ -41,7 +41,7 @@ public class TransactionServiceImplTest {
     public void shouldThrowExceptionWhenNotEnoughMoneyOnAccount() throws Exception {
         //given
          User user = new User(9,"hicham", "jager", "hicham@email.com", "1234", 1000.0, null, null);
-         Bank bank = new Bank(1 , "CIC");
+
          Transaction transaction = new Transaction(1, "cinema", 100.0, "eren@email.com", "hicham@email.com", any(),any());
 
         try {
@@ -59,7 +59,7 @@ public class TransactionServiceImplTest {
         //given
         User emitter = new User(1, "eren", "jager", "eren@email.com","1234", 350.0, null, null);
         User receiver = new User(1, "eren", "jager", "hicham@email.com","1234", 350.0, null, null);
-        Bank bank = new Bank(0,  "CIC");
+
 
 
         Transaction transaction = new Transaction();
@@ -98,7 +98,7 @@ public class TransactionServiceImplTest {
         //given
         User userEmitter = new User(1, "eren", "jager", "eren@gmail.com", "1234", 1100.0, null, null);
         User userReceiver = new User(2, "mikasa", "ackerman", "mikasa@gmail.com", "1234", 0.1, null, null);
-        Bank bank = new Bank(1,"CIC");
+
 
         Transaction transaction = new Transaction();
         User user = new User();
@@ -134,7 +134,7 @@ public class TransactionServiceImplTest {
         //given
         User emitter = new User(1, "eren", "jager", "eren@email.com","1234", 350.0, null, null);
         User receiver = new User(1, "eren", "jager", "hicham@email.com","1234", 350.0, null, null);
-        Bank bank = new Bank(0,  "CIC");
+
 
 
         Transaction transaction = new Transaction();

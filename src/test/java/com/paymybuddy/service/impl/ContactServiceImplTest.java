@@ -44,7 +44,7 @@ public class ContactServiceImplTest {
     public void shouldThrowExceptionWhenUserIsInDatabase() throws Exception {
         //given
         User user = new User(9,"hicham", "jager", "hicham@email.com", "1234", 1000.0, null, null);
-        Bank bank = new Bank(1 , "CIC");
+
         Contact contact = new Contact(1, any(), any());
 
         try {
@@ -62,7 +62,7 @@ public class ContactServiceImplTest {
 
         //given
         User user = new User(9,"hicham", "jager", null, "1234", 1000.0, null, null);
-        Bank bank = new Bank(1 , "CIC");
+
 
         Contact contact = new Contact();
         contact.setUser(user);
@@ -83,7 +83,7 @@ public class ContactServiceImplTest {
 
         //given
         User user = new User(9,"hicham", "jager", null, "1234", 1000.0, null, null);
-        Bank bank = new Bank(1 , "CIC");
+
 
         Contact contact = new Contact();
         contact.setUser(user);

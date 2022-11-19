@@ -25,7 +25,7 @@ class TransactionMapperTest {
     @Test
     public void shouldMapTransactionToDto() {
         //given
-        Transaction transaction = new Transaction(1, "cinema", 100.0, "eren@email.com", "hicham@email.com", null, null);
+        Transaction transaction = new Transaction(1, "cinema", 100.0, "eren@email.com", "hicham@email.com",  new User(), new User());
 
         //when
         TransactionDto transactionDto = transactionMapper.toDTO(transaction);

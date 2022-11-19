@@ -24,7 +24,7 @@ public class UserMapperTest {
     @Test
     public void shouldMapUserToDto() {
         //given
-        User user = new User(9, "hicham", "AZZEDDINE", "hicham@email.com", "1234", 10000.0, null, null);
+        User user = new User(9, "hicham", "AZZEDDINE", "hicham@email.com", "1234", 10000.0, "frhicham", new HashSet<>() );
 
         //when
         UserDto userDto = userMapper.toDTO(user);
